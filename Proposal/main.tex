@@ -1,0 +1,165 @@
+%%%%%%%% ICML 2023 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+
+\documentclass[nohyperref]{article}
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % for professional tables
+
+% hyperref makes hyperlinks in the resulting PDF.
+% If your build breaks (sometimes temporarily if a hyperlink spans a page)
+% please comment out the following usepackage line and replace
+% \usepackage{icml2023} with \usepackage[nohyperref]{icml2023} above.
+\usepackage{hyperref}
+
+
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Use the following line for the initial blind version submitted for review:
+\usepackage[accepted]{icml2023}
+
+% If accepted, instead use the following line for the camera-ready submission:
+% \usepackage[accepted]{icml2022}
+
+% For theorems and such
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+
+% if you use cleveref..
+\usepackage[capitalize,noabbrev]{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Todonotes is useful during development; simply uncomment the next line
+%    and comment out the line below the next line to turn off comments
+%\usepackage[disable,textsize=tiny]{todonotes}
+\usepackage[textsize=tiny]{todonotes}
+
+
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+\icmltitlerunning{Sample RL Project Proposal}
+
+\newcommand{\dnl}{\mbox{}\par}
+\newcommand{\mycomment}[1]{\textbf{Note:} \textit{#1}}
+\newcommand{\cnote}[1]{\textsf{\color{blue} [#1]}}
+%\newcommand{\cnote}[1]{}
+
+
+\begin{document}
+
+\twocolumn[
+\icmltitle{Sample RL Project Proposal}
+
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2022
+% package.
+
+% List of affiliations: The first argument should be a (short)
+% identifier you will use later to specify author affiliations
+% Academic affiliations should list Department, University, City, Region, Country
+% Industry affiliations should list Company, City, Region, Country
+
+% You can specify symbols, otherwise they are numbered in order.
+% Ideally, you should not use this facility. Affiliations will be numbered
+% in order of appearance and this is the preferred way.
+\icmlsetsymbol{equal}{*}
+
+\begin{icmlauthorlist}
+\icmlauthor{Dimitris Diochnos}{} %{equal,yyy}
+\icmlauthor{Anna Partner}{} %{equal,yyy,comp}
+%\icmlauthor{Firstname3 Lastname3}{comp}
+%\icmlauthor{Firstname4 Lastname4}{sch}
+%\icmlauthor{Firstname5 Lastname5}{yyy}
+%\icmlauthor{Firstname6 Lastname6}{sch,yyy,comp}
+%\icmlauthor{Firstname7 Lastname7}{comp}
+%\icmlauthor{}{sch}
+%\icmlauthor{Firstname8 Lastname8}{sch}
+%\icmlauthor{Firstname8 Lastname8}{yyy,comp}
+%\icmlauthor{}{sch}
+%\icmlauthor{}{sch}
+\end{icmlauthorlist}
+
+%\icmlaffiliation{yyy}{Department of XXX, University of YYY, Location, Country}
+%\icmlaffiliation{comp}{Company Name, Location, Country}
+%\icmlaffiliation{sch}{School of ZZZ, Institute of WWW, Location, Country}
+
+%\icmlcorrespondingauthor{Amy McGovern}{first1.last1@xxx.edu}
+%\icmlcorrespondingauthor{Anna Partner}{first2.last2@www.uk}
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+%\icmlkeywords{Machine Learning, ICML}
+
+\vskip 0.3in
+]
+
+% this must go after the closing bracket ] following \twocolumn[ ...
+
+% This command actually creates the footnote in the first column
+% listing the affiliations and the copyright notice.
+% The command takes one argument, which is text to display at the start of the footnote.
+% The \icmlEqualContribution command is standard text for equal contribution.
+% Remove it (just {}) if you do not need this facility.
+
+%\printAffiliationsAndNotice{}  % leave blank if no need to mention equal contribution
+%\printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
+
+\cnote{This proposal is very detailed and ambitious and is for a group of two people working together.  Clearly, if you are working alone your goals will be half as much.}
+
+\cnote{First I tell the reader what the heart of my project will be.  More detail is given in later paragraphs.}  For our ML semester project component focusing on RL, we propose to create a highly competitive machine learning agent that plays the game of hearts.   As expert hearts players, we hypothesize that we can create a player that is competitive with us.  
+%\cnote{State whether you want to do a long or short project on RL.  The big difference is the depth.}  We propose a long RL project.
+
+\cnote{Talk about the problem domain in more detail.}  Hearts is a multi-player card game where the object of the game is to win as few points as possible.  As with bridge, hearts is a trick-based game where the highest card in each trick takes the trick.  The winner of the trick gets all of the cards played in that round and any points played are assigned to that player.  Hearts are worth one point each and the queen of spades is worth 13 points.  The jack of diamonds is optionally worth -10 points.  Hearts has a special rule where a player can take all 26 points in one game.  This is called ``shooting the moon'' and it penalizes the other players instead of the player who took all the points.  In this case, the player who took all 26 points gets 0 points and the other players all get 26 points.  I will first experiment with a player without the jack of diamonds rule and perhaps add the jack of diamonds rule as my player improves.  
+
+\cnote{After discussing the project domain, you should discuss your intended reinforcement learning approach.  Give as much detail as you know (I realize you are still learning RL).}  Amy will train her hearts player using TD learning.  Anna will also use RL but she intends to use Q-learning.  Both of us plan to explore rollouts as a method to improve player performance.   We will reward our players by giving them the negative number of points won in each hand.  Thus, each point taken is a punishment and the player should seek to minimize punishment.  This will be tricky because shooting the moon should not be viewed as a punishment.  To solve this, we will not train until the end of the game but will instead save the entire game in memory.  Once the final point distribution is known, we will train using that game.  
+
+Since we will have two players, we intend to train them against each other at first.  We will also experiment against heuristic players available in the simulator.  As each player improves, we will enter them in the online competition and will save the training experience from those games.  In addition, we will play games against the player ourselves and save that experience.  Once the two players are working well together, we will focus on the combined player and expect that will be the best overall player.
+
+Because hearts is a partially observable domain, the state representation will be tricky.  We both propose to create feature vectors that summarize the cards in the player's hand as well as the important information about the past history (critical cards being played, such as the queen of spades, whether points have spread among the players yet, etc).  
+
+\cnote{Next discuss how you will evaluate your project, how you will know it is working well (or poorly), and how you will stop training.}  We will evaluate our players in several ways.  First, we will examine the number of matches won over time, as the player trains.  A match generally goes to 250 or 500 points.  Second, we will examine the average reward that the player is receiving as it trains.  Because our players will be stochastic, we will measure the average reward over time.  However, it is too computationally intensive to enter multiple agents in the online competition.  We will wait to enter the agents into the online competition until we feel that they are competitive.  Once an agent has entered, we will measure its progress by the nightly ladder performance.  This progress will not be averaged.  We hope that our player will move to the top $10\%$ of all players and we will try to enter it into the competition by November so that it has time to move to the top of the ladder.
+
+\cnote{Other details such as intended use of shared code, etc.}  In order to compete in the online competition, we will make use of the generic java hearts player code available at \textit{URL}.  We will place all of our code in separate files (except the call to the original code) and note any changes that we make to the downloaded code.  
+
+%\cnote{All written proposals must be no longer than one page per number of people in the group.}
+\cnote{Your written proposal must be no longer than one and a half column if you use the style that we have for typesetting.  If you use a single-column style for the writeup, then the proposal must be no longer than one and a half page.}
+
+
+\bibliographystyle{mslapa}
+\bibliography{my,book}
+
+\end{document}
+
+
+% This document was modified from the file originally made available by
+% Pat Langley and Andrea Danyluk for ICML-2K. This version was created
+% by Iain Murray in 2018, and modified by Alexandre Bouchard in
+% 2019 and 2021 and by Csaba Szepesvari, Gang Niu and Sivan Sabato in 2022. 
+% Previous contributors include Dan Roy, Lise Getoor and Tobias
+% Scheffer, which was slightly modified from the 2010 version by
+% Thorsten Joachims & Johannes Fuernkranz, slightly modified from the
+% 2009 version by Kiri Wagstaff and Sam Roweis's 2008 version, which is
+% slightly modified from Prasad Tadepalli's 2007 version which is a
+% lightly changed version of the previous year's version by Andrew
+% Moore, which was in turn edited from those of Kristian Kersting and
+% Codrina Lauth. Alex Smola contributed to the algorithmic style files.
