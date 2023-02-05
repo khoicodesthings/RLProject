@@ -126,10 +126,18 @@
 
 \cnote{This proposal is very detailed and ambitious and is for a group of two people working together.  Clearly, if you are working alone your goals will be half as much.}
 
-\cnote{First I tell the reader what the heart of my project will be.  More detail is given in later paragraphs.}  For our ML semester project component focusing on RL, we propose to create a highly competitive machine learning agent that plays the game of hearts.   As expert hearts players, we hypothesize that we can create a player that is competitive with us.  
-%\cnote{State whether you want to do a long or short project on RL.  The big difference is the depth.}  We propose a long RL project.
+\cnote{First I tell the reader what the heart of my project will be.  More detail is given in later paragraphs.}
+For our RL project this semester; we want to build an RL agent that can easily beat the CartPole game.  
 
-\cnote{Talk about the problem domain in more detail.}  Hearts is a multi-player card game where the object of the game is to win as few points as possible.  As with bridge, hearts is a trick-based game where the highest card in each trick takes the trick.  The winner of the trick gets all of the cards played in that round and any points played are assigned to that player.  Hearts are worth one point each and the queen of spades is worth 13 points.  The jack of diamonds is optionally worth -10 points.  Hearts has a special rule where a player can take all 26 points in one game.  This is called ``shooting the moon'' and it penalizes the other players instead of the player who took all the points.  In this case, the player who took all 26 points gets 0 points and the other players all get 26 points.  I will first experiment with a player without the jack of diamonds rule and perhaps add the jack of diamonds rule as my player improves.  
+\cnote{Talk about the problem domain in more detail.}
+CartPole is a game environment provided in the Gym package from OpenAI. In this environment, there is a pole, attached to a cart (hence the name CartPole). The cart moves along a frictionless track. Force is applied in the left and right direction of the cart.
+The goal of the game is to keep the pole upright for as long as possible. For each step taken, a +1 reward is given, including the termination step. The maximum points achievable in the game is 475. There are a few conditions that, if met, will end the game.
+
+First, if the pole angle is greater than 12 degrees, the game ends.
+
+Second, if the cart position is greater than 2.4 (or the center of the cart reaches either end of the display), the game ends.
+
+Finally, if episode length is greater than 500, the game ends.
 
 \cnote{After discussing the project domain, you should discuss your intended reinforcement learning approach.  Give as much detail as you know (I realize you are still learning RL).}  Amy will train her hearts player using TD learning.  Anna will also use RL but she intends to use Q-learning.  Both of us plan to explore rollouts as a method to improve player performance.   We will reward our players by giving them the negative number of points won in each hand.  Thus, each point taken is a punishment and the player should seek to minimize punishment.  This will be tricky because shooting the moon should not be viewed as a punishment.  To solve this, we will not train until the end of the game but will instead save the entire game in memory.  Once the final point distribution is known, we will train using that game.  
 
