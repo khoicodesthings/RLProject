@@ -9,7 +9,7 @@ alpha = 0.1
 gamma = 0.99
 
 # Define the weight matrix
-weights = np.zeros(4)
+weights = np.zeros((2, 4))
 
 # Define the number of episodes to run
 num_episodes = 500
@@ -22,14 +22,18 @@ for episode in range(num_episodes):
     episode_reward = 0
     while not done:
         # Choose an action using a softmax policy
-        action_probs = np.exp(weights.dot(state)) / np.sum(np.exp(weights.dot(state)))
+        state = np.expand_dims(state, axis=0)
+        state = state.flatten()
+        action_probs = np.exp(weights.dot(state)) / np.sum(np.exp(weights.dot(state)), axis=1)
+        action_probs = action_probs.flatten()
         action = np.random.choice(2, p=action_probs)
         # Take a step in the environment
         next_state, reward, done, _ = env.step(action)
         episode_reward += reward
         # Update the weights
-        td_error = reward + gamma * weights.dot(next_state) - weights.dot(state)
-        weights += alpha * td_error * state
+        next_state = np.expand_dims(next_state, axis=0)
+        td_error = reward + gamma * np.max(weights.dot(next_state.T), axis=1) - weights[action].dot(state.T)
+        weights[action] += alpha * td_error.flatten() * state
         state = next_state
     print("Episode {} finished with reward {}".format(episode, episode_reward))
 
