@@ -16,13 +16,13 @@ def bins(clip_min, clip_max, num):
 def discretized(observation):
     # print(observation)
     cart_pos, cart_v, pole_angle, pole_v = observation
-    digitized = [
+    discretized = [
         np.digitize(cart_pos, bins=bins(-2.4, 2.4, num_discretized)),
         np.digitize(cart_v, bins=bins(-3.0, 3.0, num_discretized)),
-        np.digitize(pole_angle, bins=bins(-0.5, 0.5, num_discretized)),
+        np.digitize(pole_angle, bins=bins(-0.2095, 0.2095, num_discretized)),
         np.digitize(pole_v, bins=bins(-2.0, 2.0, num_discretized))
     ]
-    return sum([x * (num_discretized**i) for i, x in enumerate(digitized)])
+    return sum([x * (num_discretized**i) for i, x in enumerate(discretized)])
 
 # Epsilon-greedy method
 def get_action(next_state, episode):  # Gradually take only optimal actions, epsilon-greedy method
@@ -35,16 +35,16 @@ def get_action(next_state, episode):  # Gradually take only optimal actions, eps
 
 # Q-table
 def update_q(q_table, state, action, reward, next_state, next_action):
-    gamma = 0.9
-    alpha = 0.5
     # Our friend Bellman
     # Q function
     q_table[state, action] = (1 - alpha) * q_table[state, action] + alpha * (reward + gamma * q_table[next_state, next_action])
 
     return q_table
 
-# Set up parameters --------------------------------------------------------
+# Environment set up
 env = gym.make('CartPole-v1')
+gamma = 0.9
+alpha = 0.5
 max_number_of_steps = 500  # maximum length of each episode
 num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
 num_episodes = 1000  # Total number of trials
@@ -57,13 +57,8 @@ final_x = np.zeros((num_episodes, 1))  # Store the x position of the cart at t=2
 islearned = 0  # Flag to check if learning is done
 isrender = 0  # Rendering flag
 
-# for plotting 
-episodelist = []
-scorelist = []
-
-# [5] Main routine--------------------------------------------------
+# Main loop
 for episode in range(1, num_episodes+1):  # repeat for the number of trials
-    episodelist.append(episode)
     # Initialize the environment
     observation = env.reset()
     state = discretized(observation[0])
@@ -129,9 +124,5 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
     if islearned == 1:
         break
 
-print(len(episodelist))
-print(len(scorelist))
-#plt.scatter(episodelist, scorelist)
-#plt.show()
 # if islearned:
 #    np.savetxt('final_x.csv', final_x, delimiter=",")  # save the final x-coordinate
