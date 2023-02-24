@@ -2,7 +2,9 @@ import gym
 from gym import wrappers # for image savings
 import numpy as np
 import time
+import matplotlib.pyplot as plt
 
+np.random.seed(5033)
 # Define the number of bins/categories 
 # for discretization
 def bins(clip_min, clip_max, num):
@@ -44,17 +46,23 @@ def update_q(q_table, state, action, reward, next_state, next_action):
 env = gym.make('CartPole-v1')
 max_number_of_steps = 500  # maximum length of each episode
 num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
-num_episodes = 1000  # Total number of trials
+num_episodes = 4000  # Total number of trials
 goal_average_reward = 475  # maximum rewards value
 num_dizitized = 6  # Number of divisions of the state
-q_table = np.random.uniform(low=-1, high=1, size=(num_dizitized**4, env.action_space.n))
+q_table = np.random.uniform(low=-1, high=1, 
+    size=(num_dizitized**4, env.action_space.n))
 total_reward_vec = np.zeros(num_consecutive_iterations)  # Store the reward of each trial
 final_x = np.zeros((num_episodes, 1))  # Store the x position of the cart at t=200 after learning
 islearned = 0  # Flag to check if learning is done
 isrender = 0  # Rendering flag
 
+# for plotting 
+episodelist = []
+scorelist = []
+
 # [5] Main routine--------------------------------------------------
-for episode in range(num_episodes):  # repeat for the number of trials
+for episode in range(1, num_episodes+1):  # repeat for the number of trials
+    episodelist.append(episode)
     # Initialize the environment
     observation = env.reset()
     state = digitize_state(observation[0])
@@ -66,11 +74,13 @@ for episode in range(num_episodes):  # repeat for the number of trials
             env.render()
             time.sleep(0.1)
             print(observation[0])  # output the x position of the cart
+            env.close()
+            break
 
         # Calculate s_{t+1}, r_{t}, etc. by executing action a_t
         observation, reward, done, info, extra = env.step(action)
 
-        # Set and give reward
+        # Set reward and penalty
         if done:
             if t < 475:
                 reward = -10  # penalty if it falls down
@@ -95,20 +105,27 @@ for episode in range(num_episodes):  # repeat for the number of trials
         # Processing at the end
         if done:
             print('Episode %d finished after %d time steps / with score %d and mean %f' %
-                  (episode, t + 1, episode_reward, total_reward_vec.mean()))
+                  (episode, t, episode_reward, total_reward_vec.mean()))
             total_reward_vec = np.hstack((total_reward_vec[1:], episode_reward))  # record reward
+            scorelist.append(total_reward_vec.mean())
             if islearned == 1:  # if learning is finished, store the final x-coordinate
                 final_x[episode, 0] = observation[0]
             break
 
-    if (total_reward_vec.mean() >=
-            goal_average_reward):  # if the recent 100 episodes have achieved the goal reward or more, the training is successful
+    #if (total_reward_vec.mean() >= goal_average_reward):  # if the recent 100 episodes have achieved the goal reward or more, the training is successful
+    if episode_reward >= goal_average_reward:
         print('Episode %d train agent successfully!' % episode)
+        print('After', t, 'time steps')
+        print('Average reward is', total_reward_vec.mean())
+        print('The episode score is', episode_reward)
         islearned = 1
-        #np.savetxt('learned_Q_table.csv',q_table, delimiter=",") #if you want to save the Q table
+        # np.savetxt('learned_Q_table.csv',q_table, delimiter=",") #if you want to save the Q table
         if isrender == 0:
             #env = wrappers.Monitor(env, './movie/cartpole-experiment-1') #if you want to save a video of the result
             isrender = 1
+    
+    if islearned == 1:
+        break
 
-if islearned:
-    np.savetxt('final_x.csv', final_x, delimiter=",")  # save the final x-coordinate
+# if islearned:
+#    np.savetxt('final_x.csv', final_x, delimiter=",")  # save the final x-coordinate
