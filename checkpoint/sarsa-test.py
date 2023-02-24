@@ -4,11 +4,12 @@ import numpy as np
 import time
 import matplotlib.pyplot as plt
 
+# set seed to somewhat control the RNG
 np.random.seed(5033)
 # Define the number of bins/categories 
 # for discretization
-def bins(clip_min, clip_max, num):
-    return np.linspace(clip_min, clip_max, num + 1)[1:-1]
+def bins(min, max, num):
+    return np.linspace(min, max, num + 1)[1:-1]
 
 # Discretizing the state
 # Because CartPole has continuous state
@@ -16,6 +17,8 @@ def bins(clip_min, clip_max, num):
 def discretized(observation):
     # print(observation)
     cart_pos, cart_v, pole_angle, pole_v = observation
+    # make the observation space from continuous to discrete
+    # for cart_v and pole_v I'm playing around with the bounds
     discretized = [
         np.digitize(cart_pos, bins=bins(-2.4, 2.4, num_discretized)),
         np.digitize(cart_v, bins=bins(-3.0, 3.0, num_discretized)),
@@ -26,7 +29,7 @@ def discretized(observation):
 
 # Epsilon-greedy method
 def get_action(next_state, episode):  # Gradually take only optimal actions, epsilon-greedy method
-    epsilon = 0.5 * (1 / (episode + 1)) # define some epsilon value
+    epsilon = 0.5 * (1 / (episode + 1)) # define some epsilon value, can maybe do sensitivity analysis?
     if epsilon <= np.random.uniform(0, 1):
         next_action = np.argmax(q_table[next_state])
     else:
@@ -48,7 +51,7 @@ alpha = 0.5
 max_number_of_steps = 500  # maximum length of each episode
 num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
 num_episodes = 1000  # Total number of trials
-goal_average_reward = 475  # maximum rewards value
+max_reward = 475  # maximum rewards value
 num_discretized = 6  # Number of divisions of the state
 q_table = np.random.uniform(low=-1, high=1, 
     size=(num_discretized**4, env.action_space.n))
@@ -61,12 +64,17 @@ isrender = 0  # Rendering flag
 for episode in range(1, num_episodes+1):  # repeat for the number of trials
     # Initialize the environment
     observation = env.reset()
+    # Discretize the observation space
     state = discretized(observation[0])
+    # Choose an action
     action = np.argmax(q_table[state])
+    # Initial reward
     episode_reward = 0
     #print(episodelist)
-    for t in range(max_number_of_steps):  # loop for one trial
-        if islearned == 1:  # if learning is finished, render cartPole
+
+    # loop for trials
+    for t in range(max_number_of_steps):
+        if islearned == 1:  # if learning is finished, show the movement
             env.render()
             time.sleep(0.1)
             print(observation[0])  # output the x position of the cart
@@ -90,7 +98,6 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
         # Calculate discrete state s_{t+1}
         next_state = discretized(observation)  # convert the observation state at t+1 to a discrete value
 
-        # *This is different from Q-learning*
         next_action = get_action(next_state, episode) # get the next action
         q_table = update_q(q_table, state, action, reward, next_state, next_action) # update the q values
 
@@ -109,12 +116,13 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
                 final_x[episode, 0] = observation[0]
             break
 
-    if (total_reward_vec.mean() >= goal_average_reward):  # if the recent 100 episodes have achieved the goal reward or more, the training is successful
-    #if episode_reward >= goal_average_reward:
+    # if an episode has achieved the max reward
+    #if (total_reward_vec.mean() >= max_reward):
+    if episode_reward >= max_reward:
         print('Episode %d train agent successfully!' % episode)
         print('After', t, 'time steps')
-        print('Average reward is', total_reward_vec.mean())
         print('The episode score is', episode_reward)
+        print('Average reward is', total_reward_vec.mean())
         islearned = 1
         # np.savetxt('learned_Q_table.csv',q_table, delimiter=",") #if you want to save the Q table
         if isrender == 0:
