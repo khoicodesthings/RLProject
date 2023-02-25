@@ -83,6 +83,7 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
         observation, reward, done, info, extra = env.step(action)
 
         # Set reward and penalty
+        # Otherwise, epsilon greedy will not be efficient
         if done:
             if t < 475:
                 reward = -10  # penalty if the episode fails
