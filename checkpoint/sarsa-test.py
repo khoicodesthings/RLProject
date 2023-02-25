@@ -4,6 +4,29 @@ import matplotlib.pyplot as plt
 
 # set seed to somewhat control the RNG
 np.random.seed(5033)
+
+# Environment set up
+env = gym.make('CartPole-v1')
+
+# Hyperparameters, can maybe do sensitivity analysis?
+gamma = 0.9
+alpha = 0.5
+epsilon = 0.1
+
+# Training values
+max_number_of_steps = 500  # maximum length of each episode
+num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
+num_episodes = 850  # Total number of trials
+max_reward = 475  # maximum rewards value
+num_discretized = 6  # Number of divisions of the state
+q_table = np.random.uniform(low=-1, high=1, 
+    size=(num_discretized**4, env.action_space.n))
+total_reward_vec = np.zeros(num_consecutive_iterations)  # Store the reward of each trial
+
+episodelist = []
+scorelist = []
+steplist = []
+
 # Define the number of bins/categories 
 # for discretization
 def bins(min, max, num):
@@ -37,41 +60,25 @@ def epsilon_greedy(next_state):
 def update_q(q_table, state, action, reward, next_state, next_action):
     # Our friend Bellman
     # Q function
-    q_table[state, action] = (1 - alpha) * q_table[state, action] + alpha * (reward + gamma * q_table[next_state, next_action])
+    # from the book and slide
+    q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * q_table[next_state, next_action] - q_table[state,action])
 
     return q_table
 
-# Environment set up
-env = gym.make('CartPole-v1')
-gamma = 0.9
-alpha = 0.5
-epsilon = 0.1
-max_number_of_steps = 500  # maximum length of each episode
-num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
-num_episodes = 850  # Total number of trials
-max_reward = 475  # maximum rewards value
-num_discretized = 6  # Number of divisions of the state
-q_table = np.random.uniform(low=-1, high=1, 
-    size=(num_discretized**4, env.action_space.n))
-total_reward_vec = np.zeros(num_consecutive_iterations)  # Store the reward of each trial
-
-episodelist = []
-scorelist = []
-steplist = []
 # Main loop
 for episode in range(1, num_episodes+1):  # repeat for the number of trials
     # Initialize the environment
     observation = env.reset()
-    # Discretize the observation space
+    # Initialize S
     state = discretized(observation[0])
-    # Choose an action
+    # Choose A from S using policy derived from Q
     action = np.argmax(q_table[state])
     # Initial reward
     episode_reward = 0
 
     # loop for trials
     for t in range(max_number_of_steps):
-        # get the next state, reward, etc.
+        # Take an action, and observe reward, next step, etc.
         # for some reason, not having 'extra' breaks the code
         observation, reward, done, info, extra = env.step(action)
 
@@ -85,11 +92,12 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
             reward = 1  # reward for standing at each step
 
         episode_reward += reward  # add reward
-        # Calculate discrete state s_{t+1}
+        # Get the next state
         next_state = discretized(observation)  # convert the observation state at t+1 to a discrete value
-
+        # Get the next action from the next state, using epsilon greedy method
         next_action = epsilon_greedy(next_state) # get the next action
-        q_table = update_q(q_table, state, action, reward, next_state, next_action) # update the q values
+        # Update our Q values
+        q_table = update_q(q_table, state, action, reward, next_state, next_action)
 
         # Update the next action and state
         action = next_action
