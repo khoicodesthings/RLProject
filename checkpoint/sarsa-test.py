@@ -1,7 +1,5 @@
 import gym 
-from gym import wrappers # for image savings
 import numpy as np
-import time
 import matplotlib.pyplot as plt
 
 # set seed to somewhat control the RNG
@@ -28,11 +26,10 @@ def discretized(observation):
     return sum([x * (num_discretized**i) for i, x in enumerate(discretized)])
 
 # Epsilon-greedy method
-def get_action(next_state, episode):  # Gradually take only optimal actions, epsilon-greedy method
-    epsilon = 0.5 * (1 / (episode + 1)) # define some epsilon value, can maybe do sensitivity analysis?
-    if epsilon <= np.random.uniform(0, 1):
+def epsilon_greedy(next_state):
+    if epsilon <= np.random.uniform(0, 1): #exploitation
         next_action = np.argmax(q_table[next_state])
-    else:
+    else: # exploration
         next_action = np.random.choice([0, 1])
     return next_action
 
@@ -48,6 +45,7 @@ def update_q(q_table, state, action, reward, next_state, next_action):
 env = gym.make('CartPole-v1')
 gamma = 0.9
 alpha = 0.5
+epsilon = 0.1
 max_number_of_steps = 500  # maximum length of each episode
 num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
 num_episodes = 850  # Total number of trials
@@ -70,7 +68,6 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
     action = np.argmax(q_table[state])
     # Initial reward
     episode_reward = 0
-    #print(episodelist)
 
     # loop for trials
     for t in range(max_number_of_steps):
@@ -91,14 +88,14 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
         # Calculate discrete state s_{t+1}
         next_state = discretized(observation)  # convert the observation state at t+1 to a discrete value
 
-        next_action = get_action(next_state, episode) # get the next action
+        next_action = epsilon_greedy(next_state) # get the next action
         q_table = update_q(q_table, state, action, reward, next_state, next_action) # update the q values
 
         # Update the next action and state
         action = next_action
         state = next_state
 
-        # Processing at the end
+        # Print out our results
         if done:
             print('Episode %d finished after %d time steps / with score %d and mean %f' %
                   (episode, t, episode_reward, total_reward_vec.mean()))
@@ -108,8 +105,11 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
             total_reward_vec = np.hstack((total_reward_vec[1:], episode_reward))  # record reward
             break
 
+# Plotting
 
+# Steps per episode
 plt.plot(episodelist, steplist)
+# Average score per episode
 plt.plot(episodelist, scorelist)
  
 plt.xlabel('episode')
@@ -119,5 +119,3 @@ plt.legend(['number of steps', 'average reward'], loc = 'upper left')
 
 plt.title('Number of Steps and Average Reward per Episode')
 plt.show()
-# if islearned:
-#    np.savetxt('final_x.csv', final_x, delimiter=",")  # save the final x-coordinate
