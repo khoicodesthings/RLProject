@@ -50,16 +50,16 @@ gamma = 0.9
 alpha = 0.5
 max_number_of_steps = 500  # maximum length of each episode
 num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
-num_episodes = 1000  # Total number of trials
+num_episodes = 850  # Total number of trials
 max_reward = 475  # maximum rewards value
 num_discretized = 6  # Number of divisions of the state
 q_table = np.random.uniform(low=-1, high=1, 
     size=(num_discretized**4, env.action_space.n))
 total_reward_vec = np.zeros(num_consecutive_iterations)  # Store the reward of each trial
-final_x = np.zeros((num_episodes, 1))  # Store the x position of the cart at t=200 after learning
-islearned = 0  # Flag to check if learning is done
-isrender = 0  # Rendering flag
 
+episodelist = []
+scorelist = []
+steplist = []
 # Main loop
 for episode in range(1, num_episodes+1):  # repeat for the number of trials
     # Initialize the environment
@@ -74,13 +74,6 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
 
     # loop for trials
     for t in range(max_number_of_steps):
-        if islearned == 1:  # if learning is finished, show the movement
-            env.render()
-            time.sleep(0.1)
-            print(observation[0])  # output the x position of the cart
-            env.close()
-            break
-
         # get the next state, reward, etc.
         # for some reason, not having 'extra' breaks the code
         observation, reward, done, info, extra = env.step(action)
@@ -109,28 +102,22 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
         if done:
             print('Episode %d finished after %d time steps / with score %d and mean %f' %
                   (episode, t, episode_reward, total_reward_vec.mean()))
-            
+            episodelist.append(episode)
+            scorelist.append(total_reward_vec.mean())
+            steplist.append(t)
             total_reward_vec = np.hstack((total_reward_vec[1:], episode_reward))  # record reward
-            #print(scorelist)
-            if islearned == 1:  # if learning is finished, store the final x-coordinate
-                final_x[episode, 0] = observation[0]
             break
 
-    # if an episode has achieved the max reward
-    #if (total_reward_vec.mean() >= max_reward):
-    if episode_reward >= max_reward:
-        print('Episode %d train agent successfully!' % episode)
-        print('After', t, 'time steps')
-        print('The episode score is', episode_reward)
-        print('Average reward is', total_reward_vec.mean())
-        islearned = 1
-        # np.savetxt('learned_Q_table.csv',q_table, delimiter=",") #if you want to save the Q table
-        if isrender == 0:
-            #env = wrappers.Monitor(env, './movie/cartpole-experiment-1') #if you want to save a video of the result
-            isrender = 1
-    
-    if islearned == 1:
-        break
 
+plt.plot(episodelist, steplist)
+plt.plot(episodelist, scorelist)
+ 
+plt.xlabel('episode')
+plt.ylabel('number of steps/average reward')
+
+plt.legend(['number of steps', 'average reward'], loc = 'upper left')
+
+plt.title('Number of Steps and Average Reward per Episode')
+plt.show()
 # if islearned:
 #    np.savetxt('final_x.csv', final_x, delimiter=",")  # save the final x-coordinate
