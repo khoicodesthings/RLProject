@@ -135,7 +135,19 @@ In this checkpoint document, we will provide details and update on our current e
 For Airi's progress, she was able to create a code that successfully play the game using a Q-learning algorithm.
 
 \subsection*{Khoi}
-For Khoi's progress, he is in the process of implmeneting a SARSA training algorithm, using the $\epsilon$ - greedy method. 
+For Khoi's progress, he is in the process of implmeneting a SARSA training algorithm. 
+The SARSA algorithm is a popular reinforcement learning algorithm. At each time step, the agent selects an action according to its policy, observes the next state and reward, and updates the estimated value of the current state-action pair using a learning rate and discount factor. 
+The algorithm maintains a Q-value function that estimates the expected future rewards for each state-action pair. The agent selects an action using an exploration-exploitation strategy and takes the selected action in the environment.
+
+To this end, Khoi is trying to implement an $\epsilon$ greedy method for this SARSA algorithm. For his setup, the hyperparameters are: $\epsilon = 0.1$; $\gamma = 0.9$; and $\alpha = 0.5$
+
+After training for 850 episodes, here are his current results. Note that due to the random nature of taking actions, each run will produce a different graph.
+
+\begin{figure}[H] %h forces the figure to be inserted right here
+    \centering
+    \includegraphics[width=1\linewidth]{sarsa-average.png}
+    \caption{SARSA Results}
+\end{figure}
 
 \subsection*{Difficulties}
 

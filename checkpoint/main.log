@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  24 FEB 2023 13:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  25 FEB 2023 17:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -690,41 +690,54 @@ Package hyperref Info: Link coloring OFF on input line 66.
  (d:/texlive/2022/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 138.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 142.
  (d:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (d:/texlive/2022/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 138.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 142.
  (d:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (d:/texlive/2022/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
+<sarsa-average.png, id=7, 462.528pt x 346.896pt>
+File: sarsa-average.png Graphic file (type png)
+<use sarsa-average.png>
+Package pdftex.def Info: sarsa-average.png  used on input line 148.
+(pdftex.def)             Requested size: 234.8775pt x 176.15768pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 No file main.bbl.
 [1{d:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
 
-] (./main.aux)
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.160 \end{document}
+                     <./sarsa-average.png>] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26074 strings out of 476065
- 486848 string characters out of 5795014
- 1858299 words of memory out of 5000000
- 46001 multiletter control sequences out of 15000+600000
- 521984 words of font info for 77 fonts, out of 8000000 for 9000
+ 26116 strings out of 476065
+ 487340 string characters out of 5795014
+ 1862299 words of memory out of 5000000
+ 46013 multiletter control sequences out of 15000+600000
+ 525664 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,5n,94p,1046b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{d:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (1 page, 38237 bytes).
+ 99i,6n,94p,1046b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{d:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on main.pdf (1 page, 128708 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
- 19981 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 52 PDF objects out of 1000 (max. 8388607)
+ 36 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
+ 26130 words of extra memory for PDF output out of 29859 (max. 10000000)
 
