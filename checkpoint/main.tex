@@ -154,7 +154,17 @@ For one run of 850 episodes, here are his current results. Note that due to the 
 
 \subsection*{Difficulties}
 
+One of the main difficulties we have with this project is figuring out a good way to discretize the state space of the environment.
+Fortunately, we came across the \textbf{digitize()} function from the \textbf{numpy} package that seems to do the job quite well.
+
+Another issue that we are facing, is due to the random nature of picking an action, no two runs are the same, so conducting some sort of
+sensitivity analysis for our hyperparameters have proven to be difficult. We have tried to solve this by setting a seed number at the beginning
+of our script, but that does not seem to be the solution yet
+
 \subsection*{Future Work}
+
+Our main goal in the next week or so is to finish the training for both algorithms, and then find a way to save it to memory, to be able 
+to recall it easily in a fresh environment.
 %\cnote{All written proposals must be no longer than one page per number of people in the group.}
 
 \bibliographystyle{mslapa}
