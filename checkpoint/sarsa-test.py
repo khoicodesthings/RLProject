@@ -11,7 +11,7 @@ env = gym.make('CartPole-v1')
 # Hyperparameters, can maybe do sensitivity analysis?
 gamma = 0.9
 alpha = 0.5
-epsilon = 0.1
+epsilon = 0.5
 
 # Training values
 max_number_of_steps = 500  # maximum length of each episode
