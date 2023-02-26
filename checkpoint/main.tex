@@ -141,15 +141,21 @@ The algorithm maintains a Q-value function that estimates the expected future re
 
 To this end, Khoi is trying to implement an $\epsilon$ greedy method for this SARSA algorithm. For his setup, the hyperparameters are: $\epsilon = 0.1$; $\gamma = 0.9$; and $\alpha = 0.5$
 
-For the criteria related to the CartPole environment, the agent will play the game for 850 episodes, and in each episodes, 100 steps will have their rewards recorded, in order to generate an average.
+For the criteria related to the CartPole environment, the agent will play the game for a set number of episodes, and in each episodes, 100 steps will have their rewards recorded, in order to generate an average.
 If the failing conditions is met, a penalty of -10 is given, otherwise, a reward of +1 is given.
 
-For one run of 850 episodes, here are his current results. Note that due to the random nature of taking actions, each run will produce a different graph.
+For one run of 850 episodes and one run of 1000 episodes, here are his current results. Note that due to the random nature of taking actions, each run will produce a different graph.
 
 \begin{figure}[H] %h forces the figure to be inserted right here
     \centering
     \includegraphics[width=1\linewidth]{sarsa-average.png}
-    \caption{SARSA Results}
+    \caption{SARSA Results Over 850 Episodes}
+\end{figure}
+
+\begin{figure}[H] %h forces the figure to be inserted right here
+    \centering
+    \includegraphics[width=1\linewidth]{sarsa-average-1k.png}
+    \caption{SARSA Results Over 1000 Episodes}
 \end{figure}
 
 \subsection*{Difficulties}
