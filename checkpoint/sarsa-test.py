@@ -16,7 +16,7 @@ epsilon = 0.1
 # Training values
 max_number_of_steps = 500  # maximum length of each episode
 num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
-num_episodes = 850  # Total number of trials
+num_episodes = 1000  # Total number of trials
 max_reward = 475  # maximum rewards value
 num_discretized = 6  # Number of divisions of the state
 q_table = np.random.uniform(low=-1, high=1, 
@@ -77,7 +77,7 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
     episode_reward = 0
 
     # loop for trials
-    for t in range(max_number_of_steps):
+    for t in range(max_number_of_steps + 1):
         # Take an action, and observe reward, next step, etc.
         # for some reason, not having 'extra' breaks the code
         observation, reward, done, info, extra = env.step(action)
@@ -113,6 +113,7 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
             steplist.append(t)
             total_reward_vec = np.hstack((total_reward_vec[1:], episode_reward))  # record reward
             break
+
 
 # Plotting
 
