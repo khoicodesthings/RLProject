@@ -136,8 +136,8 @@ Q-learning is a reinforcement learning algorithm that enables an agent to learn 
 The agent selects an action and observes the next state and reward.
 Q Learning is a very similar algorithm to SARSA learning. However, Q-learning uses an off-policy learning approach, updating the Q-value function using the maximum expected future reward
 
-For Q learning, she assumed that when the number of episodes get close to 1000, the pole is balanced upright by wiggling the cart and not disappear from the screen. 
-The environment is set up as mentioned in the proposal, and let gamma = 0.9, alpha = 0.5, and epsilon = 0.5 for the parameters then run the Q-learning algorithm several times and analyze performances of the agent by comparing plots and checking behavior of the agent.  
+For Q learning, she assumed that when the number of episodes get close to 1000, the pole is balanced upright by the agent choosing to move the cart left or right, while making sure the cart's center not disappear from the screen. 
+The environment is set up as mentioned in the proposal, and in this case, $\gamma = 0.9$, $\alpha = 0.5$, and $\epsilon = 0.5$ for the parameters then run the Q-learning algorithm several times and analyze performances of the agent by comparing plots and checking behavior of the agent.  
 After running the algorithm several times, the plot of average reward and total steps during episodes shows that it reached over 150 for the average reward and over 400 for total steps a few times, but both of them are not close enough to the goal.
 Also, the pole is being balanced better when the number of episodes increase, but the cart still shifts right to left and moves away from the center position
 
@@ -152,7 +152,7 @@ For one run of 1000 episodes, here are her current results. Note that due to the
 The SARSA algorithm is a popular reinforcement learning algorithm. At each time step, the agent selects an action according to its policy, observes the next state and reward, and updates the estimated value of the current state-action pair using a learning rate and discount factor. 
 The algorithm maintains a Q-value function that estimates the expected future rewards for each state-action pair. The agent selects an action using an exploration-exploitation strategy and takes the selected action in the environment.
 
-To this end, Khoi is trying to implement an $\epsilon$ greedy method for this SARSA algorithm. He also assumed that the agent will successfuly be trained in 1000 episodes. For his setup, the hyperparameters are: $\epsilon = 0.1$; $\gamma = 0.9$; and $\alpha = 0.5$
+To this end, Khoi is trying to implement an $\epsilon$ greedy method for this SARSA algorithm. He also assumed that the agent will successfuly be trained in 1000 episodes. For his setup, the hyperparameters are: $\epsilon = 0.5$; $\gamma = 0.9$; and $\alpha = 0.5$
 
 For the criteria related to the CartPole environment, the agent will play the game for a set number of episodes, and in each episodes, 100 steps will have their rewards recorded, in order to generate an average.
 If the failing conditions is met, a penalty of -10 is given, otherwise, a reward of +1 is given.
@@ -167,12 +167,14 @@ For one run of 1000 episodes, here are his current results. Note that due to the
 
 \subsection*{General Analysis}
 
-The hypothesis was that the algorithms should be able to finished training after 1000 episodes, but this was not the case. The reason that it failed to complete the training is that the agent was not trained enough, 
-so in order to rectify this, we plan on increasing the number of total episodes until the training is completed. 
-Also, the learning rate and the value of epsilon should be tested with different numbers since they are other elements being affect performance of the agent. 
+The hypothesis was that the algorithms should be able to finished training after 1000 episodes and that SARSA would perform better, but this was not the case. 
+We think that the reason the training didn't finish is that number of episodes as well as the hyperparameters weren't optimal, 
+so in order to rectify this, we plan on increasing the number of total episodes as well as testing various values for the hyperparameters. 
+Also, the learning rate and the value of epsilon should be tested with different numbers since they are other elements being affect performance of the agent. We are planning to do 
+sensitivity analysis with the hyperparameters and will compare SARSA and Q Learning further.
 Especially, the performance might be better if the value of epsilon is increased since a larger number of epsilon allows the agent to act more randomly.
 
-\subsection*{Difficulties Encounterd}
+\subsection*{Difficulties Encountered}
 
 One of the main difficulties we have with this project is figuring out a good way to discretize the state space of the environment.
 Fortunately, we came across the \textbf{digitize()} function from the \textbf{numpy} package that seems to do the job quite well.
@@ -189,6 +191,8 @@ Therefore, it was hard to see if the agent was trained well or not.
 
 Our main goal in the next week or so is to finish the training for both algorithms, and then find a way to save it to memory, to be able 
 to recall it easily in a fresh environment.
+
+Secondly, as mentioned 
 %\cnote{All written proposals must be no longer than one page per number of people in the group.}
 
 \bibliographystyle{mslapa}
