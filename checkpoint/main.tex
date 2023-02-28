@@ -146,8 +146,6 @@ Q-Learning is a very similar algorithm to SARSA learning. However, Q-learning us
 
 For Q-Learning, she assumed that when the number of episodes gets close to 1000, the pole is balanced upright by the agent choosing to move the cart left or right, while making sure the cart's center not disappear from the screen. 
 The environment is set up as mentioned in the proposal, and in this case, $\gamma = 0.9$, $\alpha = 0.5$, and $\epsilon = 0.5$ for the parameters.  
-After running the algorithm several times, the plot of average reward and total steps during episodes shows that it reached over 50 for the average reward and over 200 for total steps a few times, but both of them are not close enough to the goal.
-Also, the pole is being balanced better when the number of episodes increase, but the cart still shifts right to left and moves away from the center position.
 
 For one run of 1000 episodes, here are her current results. Note that due to the random nature of taking actions, each run will produce a different graph.
 
@@ -157,16 +155,16 @@ For one run of 1000 episodes, here are her current results. Note that due to the
     \caption{Q-Learning Results Over 1000 Episodes}
 \end{figure}
 
-Looking at the graph, we can see that the average rewards reached a plateau of approximately 55 after about 200 episodes, this shows that the agent is indeed being trained to
+Looking at the graph, we can see that the average rewards reached a plateau of approximately 50 after about 200 episodes, this shows that the agent is indeed being trained to
 take more optimal actions as the number of episodes increased.
 
 \subsection{Khoi's Progress - SARSA Learning}
 The SARSA algorithm is a popular reinforcement learning algorithm. At each time step, the agent selects an action according to its policy, observes the next state and reward, and updates the estimated value of the current state-action pair using a learning rate and discount factor. 
 The algorithm maintains a Q-value function that estimates the expected future rewards for each state-action pair. The agent selects an action using an exploration-exploitation strategy and takes the selected action in the environment.
 
-To this end, Khoi is trying to implement an $\epsilon$ greedy method for this SARSA algorithm. He also assumed that the agent will successfuly be trained in 1000 episodes. For his setup, the hyperparameters are: $\epsilon = 0.5$; $\gamma = 0.9$; and $\alpha = 0.5$
+To this end, Khoi is trying to implement an $\epsilon$ greedy method for this SARSA algorithm. He also assumed that the agent will successfully be trained in 1000 episodes. For his setup, the hyperparameters are: $\epsilon = 0.5$; $\gamma = 0.9$; and $\alpha = 0.5$
 
-For the criteria related to the CartPole environment, the agent will play the game for a set number of episodes, and in each episodes, the last 100 steps will have their rewards recorded (if the number of steps is less than 100, then the average will be over however many steps was taken for that episode) in order to generate an average.
+For the criteria related to the CartPole environment, the agent will play the game for a set number of episodes, and in each episode, the last 100 steps will have their rewards recorded (if the number of steps is less than 100, then the average will be over however many steps was taken for that episode) in order to generate an average.
 If any of the failing conditions is met, a penalty of -10 is given, otherwise, a reward of +1 is given. In the plot below, notice that a few episodes have taken around 300 steps, and in general, the average reward stays around the 50 mark.
 
 For one run of 1000 episodes, here are his current results. Note that due to the random nature of taking actions, each run will produce a different graph.
@@ -184,39 +182,40 @@ If the number of episodes were to be increased, this divergence could be amended
 
 \section{General Analysis}
 
-The hypothesis was that the algorithms should be able to finish training after 1000 episodes and that SARSA would perform better, but this was not the case. 
+The hypothesis was that the algorithms should be able to finish training after 1000 episodes and that SARSA would perform better, but this was not the case.
+Looking at the provided graph, we aren't able to conclude if one algorithm is better than the other.
 We think that the reason the training didn't finish is that the number of episodes as well as the hyperparameters weren't optimal. 
 So in order to rectify this, we plan on increasing the number of total episodes. 
-In addtion, we are planning to do sensitivity analysis with the hyperparameters and will compare SARSA and Q-Learning further.
+In addition, we are planning to do sensitivity analysis with the hyperparameters and will compare SARSA and Q-Learning further.
 In particular, we think the performance might increase if the value of epsilon is higher that allows the agent to take more random actions and explore the action space more effectively.
 
 \section{Difficulties Encountered}
 
 One of the main difficulties we have with this project is figuring out a good way to discretize the state space of the environment.
-As such, this hindered our abilities to perform more experiements in a timely manner.
+As such, this hindered our abilities to perform more experiments in a timely manner.
 Fortunately, we came across the \textbf{digitize()} function from the \textbf{numpy} package that does the job quite well.
 
 Another issue that we are facing, due to the random nature of picking an action, no two runs are the same. Therefore, conducting some sort of
 sensitivity analysis for our hyperparameters has proven to be difficult. We have tried to solve this by setting a seed number at the beginning
 of our script, but that does not seem to be an effective solution yet.
 
-Addiontally, for both algorithms, the result is unstable. For some runs, the rewards converged to an average of 50-55 after 200 episodes, and remains stable. However, divergence is encountered
+Additionally, for both algorithms, the result is unstable. For some runs, the rewards converged to an average of 50-55 after 200 episodes, and remains stable. However, divergence is encountered
 as well. This can be seen in the graph of Khoi's SARSA run. Therefore, it was hard to see if the agent was trained well or not.
 
 \section{Future Work}
 
-Our main goal in the next week or so is to finish the training for both algorithms, and then find a way to save it to memory, making it easily recallable in a fresh envinronment.
+Our main goal in the next week or so is to finish the training for both algorithms, and then find a way to save it to memory, making it easily recallable in a fresh environment.
 
 Secondly, as mentioned above, we will be doing sensitivity analysis of the hyperparameters; namely $\alpha$, $\gamma$, $\epsilon$ and see how it would
 affect our algorithms.
 
 Third, for Khoi's SARSA algorithms, he wants to explore using SARSA($\Lambda$) and compare it to the current SARSA run. 
 
-Fourth, for both algorithms, we will explore different methods for $\epsilon$ decay. Currently, $\epsilon$ is kept at a constant 0.1 for both algorithm.
+Fourth, for both algorithms, we will explore different methods for $\epsilon$ decay. Currently, $\epsilon$ is kept at a constant 0.1 for both algorithms.
 Exploring $\epsilon$ decay (such as exponential decay) will provide some useful insights for the comparison of the algorithms.
 
 Finally, we want to refine our training to fit our hypothesis of being able to finish training in 1000 episodes and make SARSA outperform Q-Learning.
-Addtionally, after we have successfuly train the agent, we want to be able to render a video of the game being played; and save the video for presentation purposes.
+Additionally, after we have successfully trained the agent, we want to be able to render a video of the game being played; and save the video for presentation purposes.
 %\cnote{All written proposals must be no longer than one page per number of people in the group.}
 
 \bibliographystyle{mslapa}
