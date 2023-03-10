@@ -16,7 +16,7 @@ epsilon = 0.5
 # Training values
 max_number_of_steps = 500  # maximum length of each episode
 num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
-num_episodes = 1000  # Total number of trials
+num_episodes = 10000  # Total number of trials
 max_reward = 475  # maximum rewards value
 num_discretized = 6  # Number of divisions of the state
 q_table = np.random.uniform(low=-1, high=1, 
@@ -118,7 +118,7 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
 # Plotting
 
 # Steps per episode
-plt.plot(episodelist, steplist)
+#plt.plot(episodelist, steplist)
 # Average score per episode
 plt.plot(episodelist, scorelist)
  
