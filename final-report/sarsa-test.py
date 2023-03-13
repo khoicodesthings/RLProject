@@ -13,7 +13,7 @@ gamma = 0.9
 alpha = 0.5
 #epsilon = 0.5
 # exponential decay
-#decay = 0.001
+decay = 0.001
 
 # Training values
 max_number_of_steps = 500  # maximum length of each episode
@@ -56,7 +56,10 @@ def discretized(observation):
 
 # Epsilon-greedy method
 def epsilon_greedy(next_state):
-    epsilon = 0.5 * (1 / (episode + 1))
+    # exponential decay
+    epsilon = 0.5 * math.exp(-decay*episode)
+    # episode decay
+    # epsilon = 0.5 * (1/episode)
     if epsilon <= np.random.uniform(0, 1): #exploitation
         next_action = np.argmax(q_table[next_state])
     else: # exploration
