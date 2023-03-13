@@ -1,7 +1,7 @@
 import gym 
 import numpy as np
 import matplotlib.pyplot as plt
-
+import math
 # set seed to somewhat control the RNG
 np.random.seed(5033)
 
@@ -12,6 +12,8 @@ env = gym.make('CartPole-v1')
 gamma = 0.9
 alpha = 0.5
 epsilon = 0.5
+# exponential decay
+decay = 0.001
 
 # Training values
 max_number_of_steps = 500  # maximum length of each episode
@@ -48,8 +50,13 @@ def discretized(observation):
     ]
     return sum([x * (num_discretized**i) for i, x in enumerate(discretized)])
 
+def epsilon_decay():
+    epsilon = math.pow(epsilon, -decay*episode)
+    return epsilon
+
 # Epsilon-greedy method
 def epsilon_greedy(next_state):
+    #epsilon_decay()
     if epsilon <= np.random.uniform(0, 1): #exploitation
         next_action = np.argmax(q_table[next_state])
     else: # exploration
