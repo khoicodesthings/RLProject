@@ -11,9 +11,9 @@ env = gym.make('CartPole-v1')
 # Hyperparameters, can maybe do sensitivity analysis?
 gamma = 0.9
 alpha = 0.5
-epsilon = 0.5
+#epsilon = 0.5
 # exponential decay
-decay = 0.001
+#decay = 0.001
 
 # Training values
 max_number_of_steps = 500  # maximum length of each episode
@@ -50,17 +50,18 @@ def discretized(observation):
     ]
     return sum([x * (num_discretized**i) for i, x in enumerate(discretized)])
 
-def epsilon_decay():
-    epsilon = math.pow(epsilon, -decay*episode)
-    return epsilon
+# def epsilon_decay(step):
+#     newep = math.pow(epsilon, -decay*step)
+#     return newep
 
 # Epsilon-greedy method
 def epsilon_greedy(next_state):
-    #epsilon_decay()
+    epsilon = 0.5 * (1 / (episode + 1))
     if epsilon <= np.random.uniform(0, 1): #exploitation
         next_action = np.argmax(q_table[next_state])
     else: # exploration
         next_action = np.random.choice([0, 1])
+    
     return next_action
 
 # Q-table
@@ -110,7 +111,7 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
         # Update the next action and state
         action = next_action
         state = next_state
-
+        
         # Print out our results
         if done:
             print('Episode %d finished after %d time steps / with score %d and mean %f' %
