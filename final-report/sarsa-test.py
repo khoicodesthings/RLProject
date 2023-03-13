@@ -2,6 +2,7 @@ import gym
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+import statistics
 # set seed to somewhat control the RNG
 np.random.seed(5033)
 
@@ -56,10 +57,12 @@ def discretized(observation):
 
 # Epsilon-greedy method
 def epsilon_greedy(next_state):
+    # static
+    #epsilon = 0.5
     # exponential decay
     epsilon = 0.5 * math.exp(-decay*episode)
     # episode decay
-    # epsilon = 0.5 * (1/episode)
+    #epsilon = 0.5 * (1/episode)
     if epsilon <= np.random.uniform(0, 1): #exploitation
         next_action = np.argmax(q_table[next_state])
     else: # exploration
@@ -125,6 +128,12 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
             total_reward_vec = np.hstack((total_reward_vec[1:], episode_reward))  # record reward
             break
 
+
+mean = sum(scorelist)/len(scorelist)
+stdev = statistics.pstdev(scorelist)
+
+print('Mean:', mean)
+print('Standard deviation:', stdev)
 
 # Plotting
 

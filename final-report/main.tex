@@ -189,6 +189,9 @@ So in order to rectify this, we plan on increasing the number of total episodes.
 In addition, we are planning to do sensitivity analysis with the hyperparameters and will compare SARSA and Q-Learning further.
 In particular, we think the performance might increase if the value of epsilon is higher that allows the agent to take more random actions and explore the action space more effectively.
 
+% SARSA with static epsilon = 0.5: mean: 52.07, standard deviation: 7.545
+% SARSA with epsilon = 0.5*(1/episode): mean: 171.9, standard devidation: 30.504
+% SARSA with epsilon = 0.5*e^(-0.001*episode): mean: 150.64, standard deviation: 41.95
 \section{Difficulties Encountered}
 
 One of the main difficulties we have with this project is figuring out a good way to discretize the state space of the environment.
