@@ -123,9 +123,12 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
 plt.plot(episodelist, scorelist)
  
 plt.xlabel('episode')
-plt.ylabel('number of steps/average reward')
+#plt.ylabel('number of steps/average reward')
+plt.ylabel('average reward')
 
-plt.legend(['number of steps', 'average reward'], loc = 'upper left')
+#plt.legend(['number of steps', 'average reward'], loc = 'upper left')
+#plt.legend('average reward', loc = 'upper left')
 
-plt.title('Number of Steps and Average Reward per Episode')
+#plt.title('Number of Steps and Average Reward per Episode')
+plt.title('Average Reward per Episode')
 plt.show()
