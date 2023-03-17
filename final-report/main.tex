@@ -55,7 +55,7 @@
 
 % The \icmltitle you define below is probably too long as a header.
 % Therefore, a short form for the running title is supplied here:
-\icmltitlerunning{Sample RL Project Proposal}
+\icmltitlerunning{CS 5033 RL Project}
 
 \newcommand{\dnl}{\mbox{}\par}
 \newcommand{\mycomment}[1]{\textbf{Note:} \textit{#1}}
@@ -66,7 +66,7 @@
 \begin{document}
 
 \twocolumn[
-\icmltitle{CS 5033 - RL Project Checkpoint}
+\icmltitle{CS 5033 - RL Project Report}
 
 % It is OKAY to include author information, even for blind
 % submissions: the style file will automatically remove it for you
@@ -207,8 +207,9 @@ In addition, we are planning to do sensitivity analysis with the hyperparameters
 In particular, we think the performance might increase if the value of epsilon is higher that allows the agent to take more random actions and explore the action space more effectively.
 
 % SARSA with static epsilon = 0.5: mean: 52.07, standard deviation: 7.545
-% SARSA with epsilon = 0.5*(1/episode): mean: 171.9, standard devidation: 30.504
-% SARSA with epsilon = 0.5*e^(-0.001*episode): mean: 207.45, standard deviation: 80.459
+% SARSA with static epsilon = 0.0: mean: 130.09, standard deviation: 15.454
+% SARSA with epsilon = 0.5*(1/episode): mean: 171.9, standard devidation: 30.504 (episode-related decay?)
+% SARSA with epsilon = 0.5*e^(-0.001*episode): mean: 207.45, standard deviation: 80.459 (exponential decay)
 \section{Difficulties Encountered}
 
 One of the main difficulties we have with this project is figuring out a good way to discretize the state space of the environment.

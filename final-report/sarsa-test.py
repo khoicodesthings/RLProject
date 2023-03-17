@@ -58,7 +58,7 @@ def discretized(observation):
 # Epsilon-greedy method
 def epsilon_greedy(next_state):
     # static
-    #epsilon = 0.5
+    # epsilon = 0.0
     # exponential decay
     epsilon = 0.5 * math.exp(-decay*episode)
     # episode decay
@@ -127,6 +127,13 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
             steplist.append(t)
             total_reward_vec = np.hstack((total_reward_vec[1:], episode_reward))  # record reward
             break
+    
+    if (total_reward_vec.mean() >= max_reward):
+    #if episode_reward >= max_reward:
+        print('Episode %d train agent successfully!' % episode)
+        print('After', t, 'time steps')
+        print('The episode score is', episode_reward)
+        print('Average reward is', total_reward_vec.mean())
 
 
 mean = sum(scorelist)/len(scorelist)
