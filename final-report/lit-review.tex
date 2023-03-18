@@ -14,7 +14,7 @@ SARSA is an on-policy temporal difference learning algorithm~\citep{sutton2018re
 It is a popular reinforcement learning algorithm. At each time step, the agent selects an action according to its policy, observes the next state and reward, and updates the estimated value of the current state-action pair using a learning rate and discount factor. 
 The algorithm maintains a Q-value function that estimates the expected future rewards for each state-action pair. The agent selects an action using an exploration-exploitation strategy and takes the selected action in the environment.
 
-The general equation for SARSA learning is:
+The update equation for SARSA learning is:
 
 $Q(s,a) <- Q(s,a) + \alpha*(R + \gamma*Q(s',a') - Q(s,a))$
 
@@ -24,6 +24,13 @@ with a small correction to the old state-action value~\citep{graepel2004learning
 The behavior of using the next state and action to update the current state and action value gives rise to the name SARSA (State, Action, Reward, [next] State, [next] Action).
 
 \subsection{Q-Learning}
-Q-learning is a reinforcement learning algorithm that enables an agent to learn an optimal policy by observing and updating the estimated value of state-action pairs. 
+Q-learning is a reinforcement learning algorithm that enables an agent to learn an optimal policy by observing and updating the estimated value of state-action pairs.
+
 The agent selects an action and observes the next state and reward.
-Q-Learning is a very similar algorithm to SARSA learning. However, Q-learning uses an off-policy learning approach, updating the Q-value function using the maximum expected future reward
+Q-Learning is a very similar algorithm to SARSA learning. However, Q-learning uses an off-policy learning approach, updating the Q-value function using the maximum expected future reward~\citep{sutton2018reinforcement}.
+
+The update equation for Q-Learning is:
+
+$Q(s,a) <- Q(s,a) + \alpha*(R + \gamma*max_{a'}Q(s',a') - Q(s,a))$
+
+Notice that the update equation always uses the maximum Q value to update the current state, action value.
