@@ -19,14 +19,19 @@ decay = 0.001
 
 # Training values
 max_number_of_steps = 500  # maximum length of each episode
-num_consecutive_iterations = 100  # Number of trials used to evaluate learning completion
-num_episodes = 10000  # Total number of trials
+num_consecutive_iterations = 100  # Number of trials used to get average reward
+num_episodes = 10000  # Total number of episodes
 max_reward = 475  # maximum rewards value
-num_discretized = 6  # Number of divisions of the state
-q_table = np.random.uniform(low=-1, high=1, 
-    size=(num_discretized**4, env.action_space.n))
-total_reward_vec = np.zeros(num_consecutive_iterations)  # Store the reward of each trial
-
+#num_bins = 6  # Number of bins for discretization
+#q_table = np.random.uniform(low=-1, high=1, 
+#    size=(num_bins**4, env.action_space.n)) # initialize q table
+# q_table = np.zeros((num_states, action_size))
+state_size = env.observation_space.shape[0]
+action_size = env.action_space.n
+num_bins = 6
+num_states = num_bins ** state_size
+q_table = np.zeros((num_states, action_size)) # initialize q table
+total_reward_vec = np.zeros(num_consecutive_iterations)  # Store the average reward
 episodelist = []
 scorelist = []
 steplist = []
@@ -45,12 +50,12 @@ def discretized(observation):
     # make the observation space from continuous to discrete
     # for cart_v and pole_v I'm playing around with the bounds
     discretized = [
-        np.digitize(cart_pos, bins=bins(-2.4, 2.4, num_discretized)),
-        np.digitize(cart_v, bins=bins(-3.0, 3.0, num_discretized)),
-        np.digitize(pole_angle, bins=bins(-0.2095, 0.2095, num_discretized)),
-        np.digitize(pole_v, bins=bins(-2.0, 2.0, num_discretized))
+        np.digitize(cart_pos, bins=bins(-2.4, 2.4, num_bins)),
+        np.digitize(cart_v, bins=bins(-3.0, 3.0, num_bins)),
+        np.digitize(pole_angle, bins=bins(-0.2095, 0.2095, num_bins)),
+        np.digitize(pole_v, bins=bins(-2.0, 2.0, num_bins))
     ]
-    return sum([x * (num_discretized**i) for i, x in enumerate(discretized)])
+    return sum([x * (num_bins**i) for i, x in enumerate(discretized)])
 
 # def epsilon_decay(step):
 #     newep = math.pow(epsilon, -decay*step)
@@ -59,15 +64,15 @@ def discretized(observation):
 # Epsilon-greedy method
 def epsilon_greedy(next_state):
     # static
-    #epsilon = 0.5
+    epsilon = 0.5
     # exponential decay
-    epsilon = 0.5 * math.exp(-decay*episode)
+    #epsilon = 0.5 * math.exp(-decay*episode)
     # episode decay
     #epsilon = 0.5 * (1/episode)
     if epsilon <= np.random.uniform(0, 1): #exploitation
         next_action = np.argmax(q_table[next_state])
     else: # exploration
-        next_action = np.random.choice([0, 1])
+        next_action = env.action_space.sample()
     
     return next_action
 
@@ -76,6 +81,8 @@ def update_q(q_table, state, action, reward, next_state, next_action):
     # Our friend Bellman
     # Q function
     # from the book and slide
+
+    # for SARASA
     q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * q_table[next_state, next_action] - q_table[state,action])
 
     return q_table
@@ -87,25 +94,20 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
     # Initialize S
     state = discretized(observation[0])
     # Choose A from S using policy derived from Q
-    action = np.argmax(q_table[state])
+    action = epsilon_greedy(state)
     # Initial reward
     episode_reward = 0
 
-    # loop for trials
-    for t in range(max_number_of_steps + 1):
+    # loop for trials, we only care if the steps go until the maximum reward
+    for t in range(max_reward + 1):
         # Take an action, and observe reward, next step, etc.
         # for some reason, not having 'extra' breaks the code
         observation, reward, done, info, extra = env.step(action)
 
-        # Set reward and penalty
+        # Set a penalty
         # Otherwise, epsilon greedy will not be efficient
-        if done:
-            if t < 475:
-                reward = -10  # penalty if the episode fails
-            else:
-                reward = 1  # no penalty if it remains upright
-        else:
-            reward = 1  # reward for standing at each step
+        if done and t < 475:
+            reward = -10  # penalty if the episode fails
 
         episode_reward += reward  # add reward
         # Get the next state
@@ -121,7 +123,6 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
         
         # Print out our results
         if done:
-            
             episodelist.append(episode)
             scorelist.append(total_reward_vec.mean())
             steplist.append(t)
@@ -132,10 +133,11 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
     
     if (total_reward_vec.mean() >= max_reward):
     #if episode_reward >= max_reward:
-        print('Episode %d train agent successfully!' % episode)
+        print('Episode %d reached the max reward!' % episode)
         print('After', t, 'time steps')
         print('The episode score is', episode_reward)
         print('Average reward is', total_reward_vec.mean())
+        break
 
 
 mean = sum(scorelist)/len(scorelist)
