@@ -128,8 +128,17 @@
 
 For our RL project this semester, we want to build an RL agent that can easily beat the CartPole game.  
 
-In this checkpoint document, we will provide details and updates on our current experiments, as well as mention any difficulties we encountered, and list any future work to be done. A slight change from the proposal, Airi is implementing Q-Learning, while Khoi will be implementing SARSA learning instead of TD-Learning.
+CartPole v1 is a game environment provided in the Gym package from OpenAI. In this environment, there is a pole, attached to a cart (hence the name CartPole). The cart moves along a frictionless track. Force is applied in the left and right direction of the cart.
+The goal of the game is to keep the pole upright for as long as possible. For each step taken, a +1 reward is given, including the termination step. The maximum points achievable in the game is 475. There are a few conditions that, if met, will end the game.
 
+First, if the pole angle is greater than 12 degrees, the game ends.
+
+Second, if the cart position is greater than 2.4 (or the center of the cart reaches either end of the display), the game ends.
+
+Finally, if episode length is greater than 500, the game ends.
+
+For the criteria related to the CartPole environment, the agent will play the game for a 10000 episodes, and in each episode, the last 100 steps will have their rewards recorded (if the number of steps is less than 100, then the average will be over however many steps was taken for that episode) in order to generate an average.
+If any of the failing conditions is met, a penalty of -10 is given, otherwise, a reward of +1 is given.
 \section{Literature Review}
 
 \subsection{Reinforcement Learning}
@@ -141,8 +150,13 @@ response to the reward(s) received (Arulkumaran et al., 2017)
 This trial-and-error behavior can be considered the root of RL.
 
 \subsection{SARSA}
+The SARSA algorithm is a popular reinforcement learning algorithm. At each time step, the agent selects an action according to its policy, observes the next state and reward, and updates the estimated value of the current state-action pair using a learning rate and discount factor. 
+The algorithm maintains a Q-value function that estimates the expected future rewards for each state-action pair. The agent selects an action using an exploration-exploitation strategy and takes the selected action in the environment.
 
 \subsection{Q-Learning}
+Q-learning is a reinforcement learning algorithm that enables an agent to learn an optimal policy by observing and updating the estimated value of state-action pairs. 
+The agent selects an action and observes the next state and reward.
+Q-Learning is a very similar algorithm to SARSA learning. However, Q-learning uses an off-policy learning approach, updating the Q-value function using the maximum expected future reward
 
 \section{Hypothesis}
 
@@ -157,9 +171,7 @@ Both Airi and Khoi's experiments will be performed in accordance to this hypothe
 \section{Experiments Done}
 
 \subsection{Airi's Experiments - Q-Learning}
-% Q-learning is a reinforcement learning algorithm that enables an agent to learn an optimal policy by observing and updating the estimated value of state-action pairs. 
-% The agent selects an action and observes the next state and reward.
-% Q-Learning is a very similar algorithm to SARSA learning. However, Q-learning uses an off-policy learning approach, updating the Q-value function using the maximum expected future reward
+
 
 % For Q-Learning, she assumed that when the number of episodes gets close to 1000, the pole is balanced upright by the agent choosing to move the cart left or right, while making sure the cart's center not disappear from the screen. 
 % The environment is set up as mentioned in the proposal, and in this case, $\gamma = 0.9$, $\alpha = 0.5$, and $\epsilon = 0.5$ for the parameters.  
@@ -176,13 +188,9 @@ Both Airi and Khoi's experiments will be performed in accordance to this hypothe
 % take more optimal actions as the number of episodes increased.
 
 \subsection{Khoi's Experiments - SARSA Learning}
-The SARSA algorithm is a popular reinforcement learning algorithm. At each time step, the agent selects an action according to its policy, observes the next state and reward, and updates the estimated value of the current state-action pair using a learning rate and discount factor. 
-The algorithm maintains a Q-value function that estimates the expected future rewards for each state-action pair. The agent selects an action using an exploration-exploitation strategy and takes the selected action in the environment.
+For SARSA Learning, Khoi is also implementing an $\epsilon$ greedy method. For his setup, the hyperparameters are: $\epsilon = 0.5$; $\gamma = 0.9$; and $\alpha = 0.5$
 
-To this end, Khoi is trying to implement an $\epsilon$ greedy method for this SARSA algorithm. He also assumed that the agent will successfully be trained in 1000 episodes. For his setup, the hyperparameters are: $\epsilon = 0.5$; $\gamma = 0.9$; and $\alpha = 0.5$
-
-For the criteria related to the CartPole environment, the agent will play the game for a set number of episodes, and in each episode, the last 100 steps will have their rewards recorded (if the number of steps is less than 100, then the average will be over however many steps was taken for that episode) in order to generate an average.
-If any of the failing conditions is met, a penalty of -10 is given, otherwise, a reward of +1 is given. In the plot below, notice that a few episodes have taken around 300 steps, and in general, the average reward stays around the 50 mark.
+Addtionally, Khoi is also implementing three differement decaying methods for the $\epsilon$ hyperparameter. These methods will be explained further in the \textbf{General Analysis} section, with \textbf{Hypothesis 2}.
 
 For one run of 10000 episodes, with $\epsilon$ kept static at 0.5, here are his current results. Note that due to the random nature of taking actions, each run will produce a different graph.
 
@@ -192,26 +200,24 @@ For one run of 10000 episodes, with $\epsilon$ kept static at 0.5, here are his 
     \caption{SARSA Results Over 10000 Episodes, Episode-related decay}
 \end{figure}
 
-% Looking at the graph, we can see that the average rewards reached a plateau of approximately 50 after about 210 to 220 episodes, this shows that the agent is indeed being trained to
-% take more optimal actions as the number of episodes increased. However, for this run, the reward seems to diverge after 410 episodes, and the average drops down to roughly 48, and remains around
-% that mark for the rest of the episodes. This could be attributed to the fact that SARSA is using the Q value of the next state, action pair; while Q-Learning uses the maximum expected Q value instead.
-% If the number of episodes were to be increased, this divergence could be amended.
+Looking at the graph, we can see that the average rewards reached a plateau of approximately 60 after about 1000 to 1500 episodes, this shows that the agent is indeed being trained to
+take more optimal actions as the number of episodes increased.
 
-With $\epsilon$ decaying with the function $\epsilon*(\frac{1}{episodes})$, a run will look like so:
+% With $\epsilon$ decaying with the function $\epsilon*(\frac{1}{episodes})$, a run will look like so:
 
-\begin{figure}[H] %h forces the figure to be inserted right here
-    \centering
-    \includegraphics[width=1\linewidth]{sarsa-average-10k-epsilon05decay-run3.png}
-    \caption{SARSA Results Over 10000 Episodes, 1/Episodes Decay}
-\end{figure}
+% \begin{figure}[H] %h forces the figure to be inserted right here
+%     \centering
+%     \includegraphics[width=1\linewidth]{sarsa-average-10k-epsilon05decay-run3.png}
+%     \caption{SARSA Results Over 10000 Episodes, 1/Episodes Decay}
+% \end{figure}
 
-And finally, with exponential decay of $\epsilon$, a run looks like so:
+% And finally, with exponential decay of $\epsilon$, a run looks like so:
 
-\begin{figure}[H] %h forces the figure to be inserted right here
-    \centering
-    \includegraphics[width=1\linewidth]{sarsa-average-10k-epsilon05exponential-decay-run3.png}
-    \caption{SARSA Results Over 10000 Episodes, Exponential decay}
-\end{figure}
+% \begin{figure}[H] %h forces the figure to be inserted right here
+%     \centering
+%     \includegraphics[width=1\linewidth]{sarsa-average-10k-epsilon05exponential-decay-run3.png}
+%     \caption{SARSA Results Over 10000 Episodes, Exponential decay}
+% \end{figure}
 
 \section{General Analysis}
 
@@ -224,7 +230,15 @@ And finally, with exponential decay of $\epsilon$, a run looks like so:
 
 \subsection{Hypothesis 1}
 
+For hypothesis 1, we compared the performance of Q Learning and SARSA learning, over a static $\epsilon$ value of 0.5
+
+Looking at the figures, we can see that [...]
+
 \subsection{Hypothesis 2}
+
+We explored three different methods of $\epsilon$ decay. First, $\epsilon$ is kept static at a value of 0.5. Second, 
+$\epsilon$ followed the decaying function of $\epsilon = 0.5 * \frac{1}{no. of episodes}$. Finally,
+$\epsilon$ follows the exponential decaying fucntion of $\epsilon = 0.5 * e^{-0.001*no. of episodes}$
 
 For SARSA, comparing the three methods of $\epsilon$ decay, yields the following results:
 
@@ -248,6 +262,8 @@ Additionally, the mean and standard deviation for each method are as follows:
 \end{table}
 
 As these results show, for the SARSA algorithm, exponential decay of $\epsilon$ performed the best.
+
+Next, for Q Learning, the comparison graph is as follows:
 % SARSA with static epsilon = 0.5: mean: 52.07, standard deviation: 7.545
 % SARSA with static epsilon = 0.0: mean: 130.09, standard deviation: 15.454
 % SARSA with epsilon = 0.5*(1/episode): mean: 171.9, standard devidation: 30.504 (episode-related decay?)
