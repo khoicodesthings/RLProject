@@ -13,7 +13,6 @@ env = gym.make('CartPole-v1')
 # Hyperparameters, can maybe do sensitivity analysis?
 gamma = 0.9
 alpha = 0.5
-#epsilon = 0.5
 # exponential decay
 decay = 0.001
 
@@ -57,10 +56,6 @@ def discretized(observation):
     ]
     return sum([x * (num_bins**i) for i, x in enumerate(discretized)])
 
-# def epsilon_decay(step):
-#     newep = math.pow(epsilon, -decay*step)
-#     return newep
-
 # Epsilon-greedy method
 def epsilon_greedy(next_state):
     # static
@@ -93,9 +88,9 @@ def update_q(q_table, state, action, reward, next_state, next_action):
 for episode in range(1, num_episodes+1):  # repeat for the number of trials
     # Initialize the environment
     observation = env.reset()
-    # Initialize S
+    # Initialize S, discretized state space
     state = discretized(observation[0])
-    # Choose A from S using policy derived from Q
+    # Choose A from S using epsilon greedy
     action = epsilon_greedy(state)
     # Initial reward
     episode_reward = 0
@@ -103,13 +98,13 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
     # loop for trials, we only care if the steps go until the maximum reward
     for t in range(max_reward + 1):
         # Take an action, and observe reward, next step, etc.
-        # for some reason, not having 'extra' breaks the code
+        # for some reason, not having 'extra' throws an error
         observation, reward, done, info, extra = env.step(action)
 
         # Set a penalty
         # Otherwise, epsilon greedy will not be efficient
-        if done and t < 475:
-            reward = -10  # penalty if the episode fails
+        if done and t < max_reward:
+            reward = -10  # penalty if the episode fails, otherwise, reward will be +1 
 
         episode_reward += reward  # add reward
         # Get the next state
