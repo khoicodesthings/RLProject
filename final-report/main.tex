@@ -124,167 +124,19 @@
 %\printAffiliationsAndNotice{}  % leave blank if no need to mention equal contribution
 %\printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
 
-\section{Introduction}
+\input{intro.tex}
 
-For our RL project this semester, we want to build an RL agent that can easily beat the CartPole game.  
+\input{lit-review.tex}
 
-CartPole v1 is a game environment provided in the Gym package from OpenAI. In this environment, there is a pole, attached to a cart (hence the name CartPole). The cart moves along a frictionless track. Force is applied in the left and right direction of the cart.
-The goal of the game is to keep the pole upright for as long as possible. For each step taken, a +1 reward is given, including the termination step. The maximum points achievable in the game is 475. There are a few conditions that, if met, will end the game.
+\input{hypothesis.tex}
 
-First, if the pole angle is greater than 12 degrees, the game ends.
+\input{experiments.tex}
 
-Second, if the cart position is greater than 2.4 (or the center of the cart reaches either end of the display), the game ends.
+\input{analysis.tex}
 
-Finally, if episode length is greater than 500, the game ends.
+\input{comparison.tex}
 
-For the criteria related to the CartPole environment, the agent will play the game for a 10000 episodes, and in each episode, the last 100 steps will have their rewards recorded (if the number of steps is less than 100, then the average will be over however many steps was taken for that episode) in order to generate an average.
-If any of the failing conditions is met, a penalty of -10 is given, otherwise, a reward of +1 is given.
-\section{Literature Review}
-
-\subsection{Reinforcement Learning}
-The goal of reinforcement learning (RL) is not simply to play a game. Rather, the driving force is to create systems that can be adaptive in the real world (Arulkumaran et al., 2017).
-
-The essence of RL is learning through interaction and reward-driven behavior. The RL agent interacts with the environment and the results of its actions; it can then adjust its behavior in
-response to the reward(s) received (Arulkumaran et al., 2017)
-
-This trial-and-error behavior can be considered the root of RL.
-
-\subsection{SARSA}
-The SARSA algorithm is a popular reinforcement learning algorithm. At each time step, the agent selects an action according to its policy, observes the next state and reward, and updates the estimated value of the current state-action pair using a learning rate and discount factor. 
-The algorithm maintains a Q-value function that estimates the expected future rewards for each state-action pair. The agent selects an action using an exploration-exploitation strategy and takes the selected action in the environment.
-
-\subsection{Q-Learning}
-Q-learning is a reinforcement learning algorithm that enables an agent to learn an optimal policy by observing and updating the estimated value of state-action pairs. 
-The agent selects an action and observes the next state and reward.
-Q-Learning is a very similar algorithm to SARSA learning. However, Q-learning uses an off-policy learning approach, updating the Q-value function using the maximum expected future reward
-
-\section{Hypothesis}
-
-Hypothesis 1: We epxect the Q Learning algorithm to perform better overall than the SARSA algorithm over 10000 episodes.
-%We expect both the Q-Learning and SARSA algorithms to be able to finish training after 1000 episodes and that the SARSA algorithm will have the 
-%higher average rewards over 100 episodes.
-
-Hypothesis 2: For both algorithms, we expect exponential decay of $\epsilon$ to perform the best, as in, have the highest average reward over 10000 episodes.
-
-Both Airi and Khoi's experiments will be performed in accordance to this hypothesis.
-
-\section{Experiments Done}
-
-\subsection{Airi's Experiments - Q-Learning}
-
-
-% For Q-Learning, she assumed that when the number of episodes gets close to 1000, the pole is balanced upright by the agent choosing to move the cart left or right, while making sure the cart's center not disappear from the screen. 
-% The environment is set up as mentioned in the proposal, and in this case, $\gamma = 0.9$, $\alpha = 0.5$, and $\epsilon = 0.5$ for the parameters.  
-
-% For one run of 1000 episodes, here are her current results. Note that due to the random nature of taking actions, each run will produce a different graph.
-
-% \begin{figure}[H] %h forces the figure to be inserted right here
-%     \centering
-%     \includegraphics[width=1\linewidth]{q-learning-average-1k.png}
-%     \caption{Q-Learning Results Over 1000 Episodes}
-% \end{figure}
-
-% Looking at the graph, we can see that the average rewards reached a plateau of approximately 50 after about 200 episodes, this shows that the agent is indeed being trained to
-% take more optimal actions as the number of episodes increased.
-
-\subsection{Khoi's Experiments - SARSA Learning}
-For SARSA Learning, Khoi is also implementing an $\epsilon$ greedy method. For his setup, the hyperparameters are: $\epsilon = 0.5$; $\gamma = 0.9$; and $\alpha = 0.5$
-
-Addtionally, Khoi is also implementing three differement decaying methods for the $\epsilon$ hyperparameter. These methods will be explained further in the \textbf{General Analysis} section, with \textbf{Hypothesis 2}.
-
-For one run of 10000 episodes, with $\epsilon$ kept static at 0.5, here are his current results. Note that due to the random nature of taking actions, each run will produce a different graph.
-
-\begin{figure}[H] %h forces the figure to be inserted right here
-    \centering
-    \includegraphics[width=1\linewidth]{sarsa-average-10k-epsilon05.png}
-    \caption{SARSA Results Over 10000 Episodes, Episode-related decay}
-\end{figure}
-
-Looking at the graph, we can see that the average rewards reached a plateau of approximately 60 after about 1000 to 1500 episodes, this shows that the agent is indeed being trained to
-take more optimal actions as the number of episodes increased.
-
-% With $\epsilon$ decaying with the function $\epsilon*(\frac{1}{episodes})$, a run will look like so:
-
-% \begin{figure}[H] %h forces the figure to be inserted right here
-%     \centering
-%     \includegraphics[width=1\linewidth]{sarsa-average-10k-epsilon05decay-run3.png}
-%     \caption{SARSA Results Over 10000 Episodes, 1/Episodes Decay}
-% \end{figure}
-
-% And finally, with exponential decay of $\epsilon$, a run looks like so:
-
-% \begin{figure}[H] %h forces the figure to be inserted right here
-%     \centering
-%     \includegraphics[width=1\linewidth]{sarsa-average-10k-epsilon05exponential-decay-run3.png}
-%     \caption{SARSA Results Over 10000 Episodes, Exponential decay}
-% \end{figure}
-
-\section{General Analysis}
-
-% The hypothesis was that the algorithms should be able to finish training after 1000 episodes and that SARSA would perform better, but this was not the case.
-% Looking at the provided graph, we aren't able to conclude if one algorithm is better than the other.
-% We think that the reason the training didn't finish is that the number of episodes as well as the hyperparameters weren't optimal. 
-% So in order to rectify this, we plan on increasing the number of total episodes. 
-% In addition, we are planning to do sensitivity analysis with the hyperparameters and will compare SARSA and Q-Learning further.
-% In particular, we think the performance might increase if the value of epsilon is higher that allows the agent to take more random actions and explore the action space more effectively.
-
-\subsection{Hypothesis 1}
-
-For hypothesis 1, we compared the performance of Q Learning and SARSA learning, over a static $\epsilon$ value of 0.5
-
-Looking at the figures, we can see that [...]
-
-\subsection{Hypothesis 2}
-
-We explored three different methods of $\epsilon$ decay. First, $\epsilon$ is kept static at a value of 0.5. Second, 
-$\epsilon$ followed the decaying function of $\epsilon = 0.5 * \frac{1}{no. of episodes}$. Finally,
-$\epsilon$ follows the exponential decaying fucntion of $\epsilon = 0.5 * e^{-0.001*no. of episodes}$
-
-For SARSA, comparing the three methods of $\epsilon$ decay, yields the following results:
-
-\begin{figure}[H] %h forces the figure to be inserted right here
-    \centering
-    \includegraphics[width=1\linewidth]{epsilon-decay-comparison.png}
-    \caption{Average Reward of SARSA, Comparing DIfferent $\epsilon$ Decay}
-\end{figure}
-
-Additionally, the mean and standard deviation for each method are as follows:
-
-\begin{table}[H]
-    \begin{tabular}{lll}
-    \hline
-    Method      & Mean   & Standard Deviation \\ \hline
-    Static      & 52.07  & 7.545              \\
-    1/Episodes  & 171.9  & 15.454             \\
-    Exponential & 207.45 & 80.459             \\ \hline
-    \end{tabular}
-    \caption{Mean of Average Reward and Standard Deviation}
-\end{table}
-
-As these results show, for the SARSA algorithm, exponential decay of $\epsilon$ performed the best.
-
-Next, for Q Learning, the comparison graph is as follows:
-% SARSA with static epsilon = 0.5: mean: 52.07, standard deviation: 7.545
-% SARSA with static epsilon = 0.0: mean: 130.09, standard deviation: 15.454
-% SARSA with epsilon = 0.5*(1/episode): mean: 171.9, standard devidation: 30.504 (episode-related decay?)
-% SARSA with epsilon = 0.5*e^(-0.001*episode): mean: 207.45, standard deviation: 80.459 (exponential decay)
-
-% \section{Difficulties Encountered}
-
-% One of the main difficulties we have with this project is figuring out a good way to discretize the state space of the environment.
-% As such, this hindered our abilities to perform more experiments in a timely manner.
-% Fortunately, we came across the \textbf{digitize()} function from the \textbf{numpy} package that does the job quite well.
-
-% Another issue that we are facing, due to the random nature of picking an action, no two runs are the same. Therefore, conducting some sort of
-% sensitivity analysis for our hyperparameters has proven to be difficult. We have tried to solve this by setting a seed number at the beginning
-% of our script, but that does not seem to be an effective solution yet.
-
-% Additionally, for both algorithms, the result is unstable. For some runs, the rewards converged to an average of 50-55 after 200 episodes, and remains stable. However, divergence is encountered
-% as well. This can be seen in the graph of Khoi's SARSA run. Therefore, it was hard to see if the agent was trained well or not.
-
-\section{Comparison to Other Methods}
-
-\section{Future Work}
+\input{future.tex}
 
 % Our main goal in the next week or so is to finish the training for both algorithms, and then find a way to save it to memory, making it easily recallable in a fresh environment.
 
@@ -299,11 +151,11 @@ Next, for Q Learning, the comparison graph is as follows:
 % Finally, we want to refine our training to fit our hypothesis of being able to finish training in 1000 episodes and make SARSA outperform Q-Learning.
 % Additionally, after we have successfully trained the agent, we want to be able to render a video of the game being played; and save the video for presentation purposes.
 
-\section*{Reference}
 %\cnote{All written proposals must be no longer than one page per number of people in the group.}
 
-\bibliographystyle{mslapa}
-\bibliography{my,book}
+\bibliographystyle{plain}
+\newpage % pagebreak
+\bibliography{}
 
 \end{document}
 
