@@ -1,1 +1,16 @@
 \section{Methods Comparison and Related Work}
+
+Swagat Kumar implemented a Deep Q Netword approach to this problem in 2020.
+Their DQN result is shown below:
+
+\begin{figure}[H] %h forces the figure to be inserted right here
+    \centering
+    \includegraphics[width=0.75\linewidth]{kumar-2020-dqn.png}
+    \caption{Performance of Kumar's DQN. Avg100score is the average of the last 100 episodes}
+\end{figure}
+
+It should be noted that Kumar used v0 of the CartPole environment, which has a much lower maximum reward threshold of 195. As such,
+their model were able to solve the problem in only 200 episodes~\citep{kumar2020balancing}. Moreover, in the paper, Kumar also stated that
+DQN is much faster compared to the usual Q-Learning approach, which solved the problem in 300 episodes.
+
+We expect the same result would apply to our v1 environment, if we were to implement a Deep Q Network approach.
