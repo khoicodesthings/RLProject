@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import statistics
+import pandas as pd
 # set seed to somewhat control the RNG
 np.random.seed(5033)
 
@@ -58,7 +59,7 @@ def discretized(observation):
 # Epsilon-greedy method
 def epsilon_greedy(next_state):
     # static
-    # epsilon = 0.0
+    #epsilon = 0.5
     # exponential decay
     epsilon = 0.5 * math.exp(-decay*episode)
     # episode decay
@@ -120,12 +121,13 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
         
         # Print out our results
         if done:
-            print('Episode %d finished after %d time steps / with score %d and mean %f' %
-                  (episode, t, episode_reward, total_reward_vec.mean()))
+            
             episodelist.append(episode)
             scorelist.append(total_reward_vec.mean())
             steplist.append(t)
             total_reward_vec = np.hstack((total_reward_vec[1:], episode_reward))  # record reward
+            print('Episode %d finished after %d time steps / with score %d and mean %f' %
+                  (episode, t, episode_reward, total_reward_vec.mean()))
             break
     
     if (total_reward_vec.mean() >= max_reward):
@@ -142,6 +144,8 @@ stdev = statistics.pstdev(scorelist)
 print('Mean:', mean)
 print('Standard deviation:', stdev)
 
+meandf = pd.DataFrame(scorelist)
+meandf.to_csv('exponential-1.csv')
 # Plotting
 
 # Steps per episode
