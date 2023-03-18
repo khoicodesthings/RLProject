@@ -76,7 +76,7 @@ def epsilon_greedy(next_state):
     
     return next_action
 
-# Q-table
+# Q-table update, uncomment the correct block for whichever algorithm we need
 def update_q(q_table, state, action, reward, next_state, next_action):
     # Our friend Bellman
     # Q function
@@ -85,6 +85,8 @@ def update_q(q_table, state, action, reward, next_state, next_action):
     # for SARASA
     q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * q_table[next_state, next_action] - q_table[state,action])
 
+    #for Q-Learning
+    #q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * max(q_table[next_state][0],q_table[next_state][1]) - q_table[state, action])
     return q_table
 
 # Main loop
