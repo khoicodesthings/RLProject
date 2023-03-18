@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  18 MAR 2023 15:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  18 MAR 2023 16:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -724,15 +724,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: sarsa-average-10k-epsilon05.png Graphic file (type png)
 <use sarsa-average-10k-epsilon05.png>
 Package pdftex.def Info: sarsa-average-10k-epsilon05.png  used on input line 29.
-(pdftex.def)             Requested size: 234.8775pt x 176.15768pt.
+(pdftex.def)             Requested size: 176.15813pt x 132.11826pt.
 ) (./analysis.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 <epsilon-decay-comparison.png, id=26, 726.715pt x 469.755pt>
 File: epsilon-decay-comparison.png Graphic file (type png)
 <use epsilon-decay-comparison.png>
 Package pdftex.def Info: epsilon-decay-comparison.png  used on input line 26.
-(pdftex.def)             Requested size: 234.8775pt x 151.82275pt.
+(pdftex.def)             Requested size: 176.15813pt x 113.86885pt.
 ) (./comparison.tex) (./future.tex) [2
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
@@ -766,7 +764,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  99i,11n,94p,1048b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {d:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (2 pages, 171735 bytes).
+Output written on main.pdf (2 pages, 171731 bytes).
 PDF statistics:
  97 PDF objects out of 1000 (max. 8388607)
  68 compressed objects within 1 object stream
