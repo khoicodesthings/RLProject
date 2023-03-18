@@ -59,9 +59,9 @@ def discretized(observation):
 # Epsilon-greedy method
 def epsilon_greedy(next_state):
     # static
-    epsilon = 0.5
+    #epsilon = 0.5
     # exponential decay
-    #epsilon = 0.5 * math.exp(-decay*episode)
+    epsilon = 0.5 * math.exp(-decay*episode)
     # episode decay
     #epsilon = 0.5 * (1/episode)
     if epsilon <= np.random.uniform(0, 1): #exploitation
@@ -144,7 +144,7 @@ print('Mean:', mean)
 print('Standard deviation:', stdev)
 
 meandf = pd.DataFrame(scorelist)
-meandf.to_csv('exponential-1.csv')
+meandf.to_csv('exponential-4.csv')
 # Plotting
 
 # Steps per episode
