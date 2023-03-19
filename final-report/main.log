@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  18 MAR 2023 21:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  18 MAR 2023 22:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -770,35 +770,51 @@ l.11
 
 Package natbib Warning: Citation `kumar2020balancing' on page 3 undefined on input line 13.
 
-) (./future.tex)
+
+Package natbib Warning: Citation `wang2013backward' on page 3 undefined on input line 18.
+
+<wang-table.png, id=49, 395.22656pt x 122.70844pt>
+File: wang-table.png Graphic file (type png)
+<use wang-table.png>
+Package pdftex.def Info: wang-table.png  used on input line 23.
+(pdftex.def)             Requested size: 176.15813pt x 54.69214pt.
+)
+Underfull \hbox (badness 1210) in paragraph at lines 27--138
+[]\OT1/ptm/m/n/10 (+20) Compared to our im-ple-men-ta-tion of SARSA and Q-
+ []
+
+(./future.tex) [3
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.157 \newpage
+               % pagebreak
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.157 \newpage
+               % pagebreak <./kumar-2020-dqn.png> <./wang-table.png>]
 No file main.bbl.
 
 Package natbib Warning: There were undefined citations.
 
-[3
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.160 \end{document}
-                    
-
- <./kumar-2020-dqn.png>] (./main.aux)
+(./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26303 strings out of 476065
- 489786 string characters out of 5795014
+ 26314 strings out of 476065
+ 489950 string characters out of 5795014
  1870299 words of memory out of 5000000
- 46069 multiletter control sequences out of 15000+600000
- 535182 words of font info for 163 fonts, out of 8000000 for 9000
+ 46075 multiletter control sequences out of 15000+600000
+ 535301 words of font info for 165 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,11n,94p,1048b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {d:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (3 pages, 288966 bytes).
+Output written on main.pdf (3 pages, 307156 bytes).
 PDF statistics:
- 109 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
- 22 named destinations out of 1000 (max. 500000)
- 35356 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 112 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
+ 23 named destinations out of 1000 (max. 500000)
+ 35361 words of extra memory for PDF output out of 35830 (max. 10000000)
 
