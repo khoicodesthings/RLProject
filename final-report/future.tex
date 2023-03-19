@@ -2,10 +2,11 @@
 
 Throughout the course of this project, we were able to implement a SARSA and a Q-Learning algorithm that successfully played the CartPole game. 
 As hypothesized, exponential decay of $\epsilon$ yielded the largest average reward. We also compared our methods' performance with existing metrics
-and found that it matched related works. 
+and found that it has explainable differences to related works. 
 
 In the future, we wished to be able to save our modesl to memory, and be able to recall them in a fresh environment without having to go through the training
-steps again. Moreover, we also wanted to implement eligibility traces with backwards TD($\lambda$) to see how it compares.
+steps again. Moreover, we also wanted to implement eligibility traces with backwards TD($\lambda$) to see how it compares. Moreover, we would also like to implement
+some sort of custom reward functions, as opposed to a fixed -10 or +1 reward, to see if learning time would improve.
 
 Finally, aside from this CartPole environment we used, there exists the Pendulum environment within the same Gym package with similar properties. We think this
 will provide an interesting challenge and comparison to solve.

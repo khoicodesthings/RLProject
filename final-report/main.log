@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  18 MAR 2023 22:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  19 MAR 2023 14:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -695,31 +695,35 @@ Package natbib Warning: Citation `Arulkumaran_2017' on page 1 undefined on input
 Package natbib Warning: Citation `Arulkumaran_2017' on page 1 undefined on input line 7.
 
 
-Package natbib Warning: Citation `sutton2018reinforcement' on page 1 undefined on input line 12.
+Package natbib Warning: Citation `qiang2011reinforcement' on page 1 undefined on input line 11.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- (d:/texlive/2022/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+
+
+Package natbib Warning: Citation `sutton2018reinforcement' on page 1 undefined on input line 15.
+
+(d:/texlive/2022/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 19.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 22.
  (d:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (d:/texlive/2022/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 19.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 22.
  (d:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (d:/texlive/2022/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
-Package natbib Warning: Citation `graepel2004learning' on page 1 undefined on input line 22.
+Package natbib Warning: Citation `graepel2004learning' on page 1 undefined on input line 25.
 
 
-Package natbib Warning: Citation `sutton2018reinforcement' on page 1 undefined on input line 30.
+Package natbib Warning: Citation `sutton2018reinforcement' on page 1 undefined on input line 33.
 
 ) (./hypothesis.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -749,7 +753,7 @@ File: kumar-2020-dqn.png Graphic file (type png)
 Package pdftex.def Info: kumar-2020-dqn.png  used on input line 8.
 (pdftex.def)             Requested size: 176.15813pt x 97.21333pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5147) has occurred while \output is active []
 
  [2
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
@@ -803,15 +807,15 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26314 strings out of 476065
- 489950 string characters out of 5795014
+ 26323 strings out of 476065
+ 490025 string characters out of 5795014
  1870299 words of memory out of 5000000
  46075 multiletter control sequences out of 15000+600000
- 535301 words of font info for 165 fonts, out of 8000000 for 9000
+ 535655 words of font info for 171 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,11n,94p,1048b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {d:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (3 pages, 307156 bytes).
+Output written on main.pdf (3 pages, 307952 bytes).
 PDF statistics:
  112 PDF objects out of 1000 (max. 8388607)
  76 compressed objects within 1 object stream
