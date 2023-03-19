@@ -19,7 +19,7 @@ The algorithm maintains a Q-value function that estimates the expected future re
 
 The update equation for SARSA learning is:
 
-$Q(s,a) <- Q(s,a) + \alpha*(R + \gamma*Q(s',a') - Q(s,a))$
+$Q(s,a) \leftarrow Q(s,a) + \alpha*(R + \gamma*Q(s',a') - Q(s,a))$
 
 where $\alpha$ is the learning rate, and $\gamma$ is the discount factor for future reward. For any given state-action pair, a new state-action value is obtained
 with a small correction to the old state-action value~\citep{graepel2004learning}
@@ -34,6 +34,6 @@ Q-Learning is a very similar algorithm to SARSA learning. However, Q-learning us
 
 The update equation for Q-Learning is:
 
-$Q(s,a) <- Q(s,a) + \alpha*(R + \gamma*max_{a'}Q(s',a') - Q(s,a))$
+$Q(s,a) \leftarrow Q(s,a) + \alpha*(R + \gamma*max_{a'}Q(s',a') - Q(s,a))$
 
 Notice that the update equation always uses the maximum Q value to update the current state, action value.
