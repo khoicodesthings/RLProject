@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  19 MAR 2023 14:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.28)  19 MAR 2023 15:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -733,51 +733,60 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]) (./experiments.tex
-<sarsa-average-10k-epsilon05.png, id=25, 462.528pt x 346.896pt>
+<random-action.png, id=25, 462.528pt x 346.896pt>
+File: random-action.png Graphic file (type png)
+<use random-action.png>
+Package pdftex.def Info: random-action.png  used on input line 9.
+(pdftex.def)             Requested size: 176.15813pt x 132.11826pt.
+<sarsa-average-10k-epsilon05.png, id=27, 462.528pt x 346.896pt>
 File: sarsa-average-10k-epsilon05.png Graphic file (type png)
 <use sarsa-average-10k-epsilon05.png>
-Package pdftex.def Info: sarsa-average-10k-epsilon05.png  used on input line 29.
+Package pdftex.def Info: sarsa-average-10k-epsilon05.png  used on input line 40.
 (pdftex.def)             Requested size: 176.15813pt x 132.11826pt.
-) (./analysis.tex
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<epsilon-decay-comparison.png, id=27, 726.715pt x 469.755pt>
+) (./analysis.tex
+<sarsa-vs-ql.png, id=28, 725.71124pt x 418.56375pt>
+File: sarsa-vs-ql.png Graphic file (type png)
+<use sarsa-vs-ql.png>
+Package pdftex.def Info: sarsa-vs-ql.png  used on input line 17.
+(pdftex.def)             Requested size: 176.15813pt x 101.60057pt.
+ [2
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.31 
+     
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.31 
+     
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.31 
+      <./random-action.png> <./sarsa-average-10k-epsilon05.png> <./sarsa-vs-ql.png>]
+<epsilon-decay-comparison.png, id=50, 726.715pt x 451.6875pt>
 File: epsilon-decay-comparison.png Graphic file (type png)
 <use epsilon-decay-comparison.png>
-Package pdftex.def Info: epsilon-decay-comparison.png  used on input line 26.
-(pdftex.def)             Requested size: 176.15813pt x 113.86885pt.
+Package pdftex.def Info: epsilon-decay-comparison.png  used on input line 34.
+(pdftex.def)             Requested size: 176.15813pt x 109.48927pt.
 ) (./comparison.tex
-<kumar-2020-dqn.png, id=28, 540.21825pt x 298.11375pt>
+<kumar-2020-dqn.png, id=51, 540.21825pt x 298.11375pt>
 File: kumar-2020-dqn.png Graphic file (type png)
 <use kumar-2020-dqn.png>
 Package pdftex.def Info: kumar-2020-dqn.png  used on input line 8.
 (pdftex.def)             Requested size: 176.15813pt x 97.21333pt.
 
-Underfull \vbox (badness 5147) has occurred while \output is active []
-
- [2
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.11 
-     
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.11 
-     
-pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.11 
-      <./sarsa-average-10k-epsilon05.png> <./epsilon-decay-comparison.png>]
 
 Package natbib Warning: Citation `kumar2020balancing' on page 3 undefined on input line 13.
 
 
 Package natbib Warning: Citation `wang2013backward' on page 3 undefined on input line 18.
 
-<wang-table.png, id=49, 395.22656pt x 122.70844pt>
+<wang-table.png, id=52, 395.22656pt x 122.70844pt>
 File: wang-table.png Graphic file (type png)
 <use wang-table.png>
 Package pdftex.def Info: wang-table.png  used on input line 23.
@@ -788,16 +797,26 @@ Underfull \hbox (badness 1210) in paragraph at lines 27--138
  []
 
 (./future.tex) [3
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.157 \newpage
-               % pagebreak
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.157 \newpage
-               % pagebreak <./kumar-2020-dqn.png> <./wang-table.png>]
+               % pagebreak
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.157 \newpage
+               % pagebreak
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.157 \newpage
+               % pagebreak
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.157 \newpage
+               % pagebreak <./epsilon-decay-comparison.png> <./kumar-2020-dqn.png> <./wang-table.png>]
 No file main.bbl.
 
 Package natbib Warning: There were undefined citations.
@@ -807,18 +826,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26323 strings out of 476065
- 490025 string characters out of 5795014
+ 26346 strings out of 476065
+ 490386 string characters out of 5795014
  1871299 words of memory out of 5000000
- 46075 multiletter control sequences out of 15000+600000
- 535655 words of font info for 171 fonts, out of 8000000 for 9000
+ 46087 multiletter control sequences out of 15000+600000
+ 535887 words of font info for 175 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,11n,94p,1048b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {d:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><d:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (3 pages, 307983 bytes).
+Output written on main.pdf (3 pages, 365789 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 76 compressed objects within 1 object stream
- 23 named destinations out of 1000 (max. 500000)
- 35361 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 120 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
+ 26 named destinations out of 1000 (max. 500000)
+ 35371 words of extra memory for PDF output out of 35830 (max. 10000000)
 

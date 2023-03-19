@@ -9,9 +9,17 @@
 
 \subsection{Hypothesis 1}
 
-For hypothesis 1, we compared the performance of Q Learning and SARSA learning, over a static $\epsilon$ value of 0.5
+This comparison is done between Khoi's SARSA algorithm, and Airi's Q-Learning algorithm. Below is the graph of average reward
+for each algorithm, with $\epsilon$ kept static at 0.5
 
-Looking at the figures, we can see that [...]
+\begin{figure}[H] %h forces the figure to be inserted right here
+    \centering
+    \includegraphics[width=0.75\linewidth]{sarsa-vs-ql.png}
+    \caption{Comparison of SARSA and Q Learning}
+\end{figure}
+
+Looking at the figures, we can see that Q-Learning perform slightly better than SARSA, as the average reward stayed at a higher range for longer.
+Moreover, Q-Learning has an average reward of $57.44$ while SARSA's average is only $52.41$.
 
 \subsection{Hypothesis 2}
 

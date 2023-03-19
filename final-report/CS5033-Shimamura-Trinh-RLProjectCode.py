@@ -78,10 +78,10 @@ def update_q(q_table, state, action, reward, next_state, next_action):
     # from the book and slide
 
     # for SARASA
-    q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * q_table[next_state, next_action] - q_table[state,action])
+    #q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * q_table[next_state, next_action] - q_table[state,action])
 
     #for Q-Learning
-    #q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * max(q_table[next_state][0],q_table[next_state][1]) - q_table[state, action])
+    q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * max(q_table[next_state][0],q_table[next_state][1]) - q_table[state, action])
     return q_table
 
 # Main loop
@@ -144,7 +144,7 @@ print('Mean:', mean)
 print('Standard deviation:', stdev)
 
 meandf = pd.DataFrame(scorelist)
-meandf.to_csv('static-4.csv')
+meandf.to_csv('static-q-learning.csv')
 # Plotting
 
 # Steps per episode

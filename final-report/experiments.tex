@@ -1,5 +1,16 @@
 \section{Experiments Done}
 
+\subsection{Preliminary Test}
+
+This section serves as a baseline. Here, the game is played randomly, without using any training algorithm. Here are the results:
+
+\begin{figure}[H] %h forces the figure to be inserted right here
+    \centering
+    \includegraphics[width=0.75\linewidth]{random-action.png}
+    \caption{Baseline Testing Results}
+\end{figure}
+
+Looking at the graph, we can see that the average reward are very low.
 \subsection{Airi's Experiments - Q-Learning}
 
 
@@ -31,7 +42,7 @@ For one run of 10000 episodes, with $\epsilon$ kept static at 0.5, here are his 
 \end{figure}
 
 Looking at the graph, we can see that the average rewards reached a plateau of approximately 60 after about 1000 to 1500 episodes, this shows that the agent is indeed being trained to
-take more optimal actions as the number of episodes increased.
+take more optimal actions as the number of episodes increased. Compared to the baseline results, the average reward are much higher.
 
 % With $\epsilon$ decaying with the function $\epsilon*(\frac{1}{episodes})$, a run will look like so:
 
