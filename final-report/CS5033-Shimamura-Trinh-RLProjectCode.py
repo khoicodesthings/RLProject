@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 import math
 import statistics
 import pandas as pd
+import time
 # set seed to somewhat control the RNG
+start = time.time()
 np.random.seed(5033)
 
 # Environment set up
@@ -78,10 +80,10 @@ def update_q(q_table, state, action, reward, next_state, next_action):
     # from the book and slide
 
     # for SARASA
-    #q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * q_table[next_state, next_action] - q_table[state,action])
+    q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * q_table[next_state, next_action] - q_table[state,action])
 
     #for Q-Learning
-    q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * max(q_table[next_state][0],q_table[next_state][1]) - q_table[state, action])
+    #q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * max(q_table[next_state][0],q_table[next_state][1]) - q_table[state, action])
     return q_table
 
 # Main loop
@@ -136,6 +138,10 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
         print('Average reward is', total_reward_vec.mean())
         break
 
+end = time.time()
+
+total_time = end - start
+print('Total time to run 10000 episodes is', str(total_time))
 
 mean = sum(scorelist)/len(scorelist)
 stdev = statistics.pstdev(scorelist)
@@ -143,8 +149,8 @@ stdev = statistics.pstdev(scorelist)
 print('Mean:', mean)
 print('Standard deviation:', stdev)
 
-meandf = pd.DataFrame(scorelist)
-meandf.to_csv('static-q-learning.csv')
+#meandf = pd.DataFrame(scorelist)
+#meandf.to_csv('static-q-learning.csv')
 # Plotting
 
 # Steps per episode
