@@ -61,9 +61,9 @@ def epsilon_greedy(next_state):
     # static
     #epsilon = 0.5
     # exponential decay
-    epsilon = 0.5 * math.exp(-decay*episode)
+    #epsilon = 0.5 * math.exp(-decay*episode)
     # episode decay
-    #epsilon = 0.5 * (1/episode)
+    epsilon = 0.5 * (1/episode)
     if epsilon <= np.random.uniform(0, 1): #exploitation
         next_action = np.argmax(q_table[next_state])
     else: # exploration
@@ -144,7 +144,7 @@ print('Mean:', mean)
 print('Standard deviation:', stdev)
 
 meandf = pd.DataFrame(scorelist)
-meandf.to_csv('exponential-4.csv')
+meandf.to_csv('1overEpisode-4.csv')
 # Plotting
 
 # Steps per episode
