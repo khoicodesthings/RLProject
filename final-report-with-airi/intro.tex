@@ -1,0 +1,13 @@
+\section{Domain Introduction}
+
+CartPole v1 is a game environment provided in the Gym package from OpenAI. In this environment, there is a pole, attached to a cart (hence the name CartPole). The cart moves along a friction-less track. Force is applied in the left and right direction of the cart.
+The goal of the game is to keep the pole upright for as long as possible. For each step taken, a +1 reward is given, including the termination step. The maximum points achievable in the game is 475. There are a few conditions that, if met, will end the game.
+
+First, if the pole angle is greater than 12 degrees, the game ends.
+
+Second, if the cart position is greater than 2.4 (or the center of the cart reaches either end of the display), the game ends.
+
+Finally, if episode length is greater than 500, the game ends.
+
+For the criteria related to the CartPole environment, the agent will play the game for a total of 10000 episodes, and in each episode, the last 100 steps will have their rewards recorded (if the number of steps is less than 100, then the average will be over however many steps was taken for that episode) in order to generate an average.
+If any of the failing conditions is met, a penalty of -10 is given, otherwise, a reward of +1 is given.

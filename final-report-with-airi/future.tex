@@ -1,0 +1,11 @@
+\section{Conclusion and Future Work}
+
+Throughout the course of this project, we were able to implement a SARSA and a Q-Learning algorithm that successfully played the CartPole game. 
+As hypothesized, Q Learning performed slightly better than SARSA overall. Secondly, Exponential decay of $\epsilon$ yielded the largest average reward for SARSA. Thirdly, for Q Learning, softmax policy performed worse than either of the $\epsilon$ decay method. 
+
+In the future, we wished to be able to save our models to memory, and be able to recall them in a fresh environment without having to go through the training
+steps again. Moreover, we also wanted to implement eligibility traces with backwards view of TD($\lambda$) to see how it compares. Additionally, we would like to implement a DQN to compare to Kumar's results in~\citep{kumar2020balancing}. Finally, we would also like to implement
+some sort of custom reward function(s), as opposed to a fixed -10 or +1 reward, to see if learning time would improve.
+
+Aside from the CartPole environment we used, there exists the Pendulum environment within the same Gym package with similar properties. We think this
+will provide an interesting challenge and comparison to solve.

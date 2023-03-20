@@ -5,8 +5,9 @@ import math
 import statistics
 import pandas as pd
 import time
-# set seed to somewhat control the RNG
+# start timer
 start = time.time()
+# set seed to somewhat control the RNG
 np.random.seed(5033)
 
 # Environment set up
@@ -144,17 +145,11 @@ for episode in range(1, num_episodes+1):  # repeat for the number of trials
             print('Episode %d finished after %d time steps / with score %d and mean %f' %
                   (episode, t, episode_reward, total_reward_vec.mean()))
             break
-    
-    if (total_reward_vec.mean() >= max_reward):
-    #if episode_reward >= max_reward:
-        print('Episode %d reached the max reward!' % episode)
-        print('After', t, 'time steps')
-        print('The episode score is', episode_reward)
-        print('Average reward is', total_reward_vec.mean())
-        break
 
+# end timer
 end = time.time()
 
+# calculate total time to run 10000 episodes
 total_time = end - start
 print('Total time to run 10000 episodes is', str(total_time))
 
@@ -164,22 +159,19 @@ stdev = statistics.pstdev(scorelist)
 print('Mean:', mean)
 print('Standard deviation:', stdev)
 
+# these lines are for generating csv files for comparison plots
 #meandf = pd.DataFrame(scorelist)
 #meandf.to_csv('static-q-learning.csv')
+
 # Plotting
 
-# Steps per episode
-#plt.plot(episodelist, steplist)
 # Average score per episode
 plt.plot(episodelist, scorelist)
- 
+
+# Axis labelling 
 plt.xlabel('episode')
-#plt.ylabel('number of steps/average reward')
 plt.ylabel('average reward')
 
-#plt.legend(['number of steps', 'average reward'], loc = 'upper left')
-#plt.legend('average reward', loc = 'upper left')
-
-#plt.title('Number of Steps and Average Reward per Episode')
+# Plot title and showing the plot
 plt.title('Average Reward per Episode')
 plt.show()

@@ -1,0 +1,43 @@
+\section{Background}
+
+\subsection{Reinforcement Learning}
+The goal of reinforcement learning (RL) is not simply to play a game. Rather, the driving force is to create systems that can be adaptive in the real world~\cite{Arulkumaran_2017}.
+
+The essence of RL is learning through interaction and reward-driven behavior. The RL agent interacts with the environment and the results of its actions; it can then adjust its behavior in
+response to the reward(s) received~\citep{Arulkumaran_2017}
+
+This trial-and-error behavior can be considered the root of RL.
+
+Reinforcement learning has been used in many applications such as process control, dispatch management, robot control, game competition, etc.~\citep{qiang2011reinforcement}. In this project, we
+will explore using reinforcement learning to play the CartPole game, using 2 algorithm: SARSA and Q-Learning.
+
+\subsection{SARSA}
+SARSA is an on-policy temporal difference learning algorithm~\citep{sutton2018reinforcement}.
+
+It is a popular reinforcement learning algorithm. At each time step, the agent selects an action according to its policy, observes the next state and reward, and updates the estimated value of the current state-action pair using a learning rate and discount factor. 
+The algorithm maintains a Q-value function that estimates the expected future rewards for each state-action pair. The agent selects an action using an exploration-exploitation strategy and takes the selected action in the environment.
+
+The update equation for SARSA learning is:
+
+$Q(s,a) \leftarrow Q(s,a) + \alpha*(R + \gamma*Q(s',a') - Q(s,a))$
+
+where $\alpha$ is the learning rate, and $\gamma$ is the discount factor for future reward. For any given state-action pair, a new state-action value is obtained
+with a small correction to the old state-action value~\citep{graepel2004learning}
+
+The behavior of using the next state and action to update the current state and action value gives rise to the name SARSA (State, Action, Reward, [next] State, [next] Action).
+
+\subsection{Q-Learning}
+Q-learning is a reinforcement learning algorithm that enables an agent to learn an optimal policy by observing and updating the estimated value of state-action pairs.
+
+The agent selects an action and observes the next state and reward.
+Q-Learning is a very similar algorithm to SARSA learning. However, Q-learning uses an off-policy learning approach, updating the Q-value function using the maximum expected future reward~\citep{sutton2018reinforcement}.
+
+The update equation for Q-Learning is:
+
+$Q(s,a) \leftarrow Q(s,a) + \alpha*(R + \gamma*max_{a'}Q(s',a') - Q(s,a))$
+
+Notice that the update equation always uses the maximum Q value to update the current state, action value.
+
+In terms of convergence rate and stability, Q-learning performs better than SARSA in the CartPole problem as it allows to learn the optimal policy. However, though Q-learning is simpler and less expensive to implement, it can lead to overestimation of the action values and result in sub-optimal policies~\citep{nagendra2017comparison}. Additionally, due to lack of robustness and slow convergence in some cases, it is challenging to use Q-learning in real-world applications~\citep{manju2011analysis}. 
+
+Also, besides epsilon greedy method, softmax exploration is also used as exploration strategy for Q-learning. It selects actions based on the probability determined by a softmax function. This strategy allows to balance exploration and exploitation of high-value actions, therefore even though it is hard to tune the temperature parameter, softmax performs better than the $\epsilon$ greedy exploration strategy~\citep{tijsma2016comparing}. 
